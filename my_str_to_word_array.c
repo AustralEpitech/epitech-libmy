@@ -7,6 +7,15 @@
 
 #include <stdlib.h>
 
+int my_isalphan(char c)
+{
+    if (('A' <= c && c <= 'Z') ||
+    ('a' <= c && c <= 'z') ||
+    ('0' <= c && c <= '9'))
+        return (1);
+    return (0);
+}
+
 int my_count_word(char const *str, int len)
 {
     int nbr_w = 0;
