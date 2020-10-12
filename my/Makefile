@@ -10,8 +10,8 @@ all: compil
 compil:
 	gcc -c *.c
 	ar rc libmy.a *.o
+	cp libmy.a ..
 	rm -f *.o
-	mv libmy.a ..
 	cp my.h ../../include
 
 clean:
