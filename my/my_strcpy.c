@@ -5,6 +5,8 @@
 ** my_strcpy
 */
 
+int my_strlen(char const *);
+
 char *my_strcpy(char *dest, char const *src)
 {
     int i = 0;

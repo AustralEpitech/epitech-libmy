@@ -5,6 +5,8 @@
 ** my_strncat
 */
 
+int my_strlen(char const *);
+
 char *my_strncat(char *dest, char const *src, int n)
 {
     int len = my_strlen(dest);

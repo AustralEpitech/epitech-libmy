@@ -5,6 +5,8 @@
 ** my_str_isalpha
 */
 
+int my_strlen(char const *);
+
 int my_str_isalpha(char const *str)
 {
     int len = my_strlen(str);

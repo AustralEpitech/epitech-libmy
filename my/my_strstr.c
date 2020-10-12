@@ -5,6 +5,8 @@
 ** my_strstr
 */
 
+int my_strlen(char const *);
+
 int check(char *str, int index, char const *to_find)
 {
     int i = 1;

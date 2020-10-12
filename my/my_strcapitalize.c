@@ -5,6 +5,9 @@
 ** my_strcapitalize
 */
 
+int my_strlen(char const *);
+char *my_strlowcase(char *);
+
 int my_isin(char *str, char c)
 {
     for (int i = 0; i < my_strlen(str); i++) {

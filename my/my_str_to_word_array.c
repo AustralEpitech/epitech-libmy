@@ -7,6 +7,8 @@
 
 #include <stdlib.h>
 
+int my_strlen(char const *);
+
 int my_isalphan(char c)
 {
     if (('A' <= c && c <= 'Z') ||

@@ -5,6 +5,8 @@
 ** my_strcmp
 */
 
+int my_strlen(char const *);
+
 int my_strcmp(char const *s1, char const *s2)
 {
     int len = my_strlen(s1);

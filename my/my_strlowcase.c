@@ -5,6 +5,8 @@
 ** my_strlowcase
 */
 
+int my_strlen(char const *);
+
 char *my_strlowcase(char *str)
 {
     int len = my_strlen(str);

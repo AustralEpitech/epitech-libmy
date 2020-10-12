@@ -7,6 +7,9 @@
 
 #include <stdlib.h>
 
+int my_strlen(char const *);
+char *my_strcpy(char *, char const *);
+
 char *my_strdup(char const *src)
 {
     char *str;

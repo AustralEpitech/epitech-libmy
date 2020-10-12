@@ -5,6 +5,8 @@
 ** my_str_islower
 */
 
+int my_strlen(char const *);
+
 int my_str_islower(char const *str)
 {
     int len = my_strlen(str);

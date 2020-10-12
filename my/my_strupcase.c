@@ -5,6 +5,8 @@
 ** my_strupcase
 */
 
+int my_strlen(char const *);
+
 char *my_strupcase(char *str)
 {
     int len = my_strlen(str);

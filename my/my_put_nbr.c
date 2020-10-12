@@ -5,6 +5,8 @@
 ** my_put_nbr
 */
 
+void my_putchar(char);
+
 int my_put_nbr(int nb)
 {
     int nbr = nb;
