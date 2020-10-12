@@ -11,7 +11,6 @@ compil:
 	gcc -c *.c
 	ar rc libmy.a *.o
 	cp libmy.a ..
-	rm -f *.o
 	cp my.h ../../include
 
 clean:
