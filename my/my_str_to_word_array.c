@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2020
-** cpool08
+** libmy
 ** File description:
 ** my_str_to_word_array
 */

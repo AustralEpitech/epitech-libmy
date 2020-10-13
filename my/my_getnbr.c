@@ -18,7 +18,7 @@ int my_getnbr(char const *str)
             nb = nb * 10 + str[i] - '0';
             test = 1;
         if (test)
-            return(nb);
+            return (nb);
     }
     return (0);
 }
