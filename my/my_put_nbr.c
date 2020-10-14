@@ -16,10 +16,10 @@ int my_put_nbr(int nb)
         my_putchar('-');
         nb *= -1;
     }
-    nbr = nb;
-    for (i = 0; nbr >= 10; i++)
-        nbr /= 10;
-    my_putchar('0' + nbr);
-    if (nbr != nb)
-        my_put_nbr(nb - nbr * 10 * i);
+    if (nb > 9) {
+        my_put_nbr(nb / 10);
+        my_put_nbr(nb % 10);
+    } else {
+        my_putchar(nb + '0');
+    }
 }
