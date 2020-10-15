@@ -48,7 +48,7 @@ $(NAME):	$(OBJ)
 	gcc -c $(SRC)
 	ar rc $(NAME) $(OBJ)
 	cp $(NAME) ..
-	cp my.h ../../include
+	# cp my.h ../../include
 
 clean:
 	rm -f $(OBJ)
