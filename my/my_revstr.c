@@ -5,8 +5,6 @@
 ** my_revstr
 */
 
-#include <stdio.h>
-
 int my_strlen(char const *);
 
 char *my_revstr(char *str)

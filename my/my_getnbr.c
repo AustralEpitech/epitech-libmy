@@ -5,8 +5,6 @@
 ** my_getnbr
 */
 
-#include <stdio.h>
-
 int my_is_num(char c)
 {
     if ('0' <= c && c <= '9') {
