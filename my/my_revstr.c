@@ -21,9 +21,3 @@ char *my_revstr(char *str)
     }
     return (str);
 }
-
-int main (void)
-{
-    char str[] = "abcdef";
-    printf("%s\n", my_revstr(str));
-}
