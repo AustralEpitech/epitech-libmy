@@ -45,16 +45,16 @@ NAME	=	libmy.a
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	gcc -c $(SRC)
 	ar rc $(NAME) $(OBJ)
 	cp $(NAME) ..
-	# cp my.h ../../include
+	cp my.h ../../include/
 
 clean:
 	rm -f $(OBJ)
 
 fclean:		clean
 	rm -f $(NAME)
+	rm -f ../$(NAME)
 
 re:			fclean all
 
