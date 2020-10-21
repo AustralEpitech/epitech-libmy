@@ -5,18 +5,15 @@
 ** my_strstr
 */
 
-int my_strlen(char const *);
+int my_strlen(char const *str);
 
 int check(char *str, int index, char const *to_find)
 {
-    int i = 1;
     int test = 1;
 
-    while (i < my_strlen(to_find) && test == 1) {
-        if (str[index + i] != to_find[i]) {
+    for (int i = 0; to_find[i] != '\0' && test == 1; i++) {
+        if (str[index + i] != to_find[i])
             test = 0;
-        }
-        i++;
     }
     return (test);
 }
@@ -25,17 +22,14 @@ char *my_strstr(char *str, char const *to_find)
 {
     int i = 0;
     int test = 0;
-    int len = my_strlen(str);
+    int to_findlen = my_strlen(to_find);
 
-    while (i < len - 1 && test == 0) {
-        if (str[i] == to_find[0] && len - i >= my_strlen(to_find)) {
+    for (int len = my_strlen(str); i < len - 1 && test == 0; i++) {
+        if (str[i] == to_find[0] && len - i >= to_findlen)
             test = check(str, i, to_find);
-        }
-        i++;
     }
-    if (test) {
+    if (test)
         return (&str[i - 1]);
-    } else {
+    else
         return (0);
-    }
 }

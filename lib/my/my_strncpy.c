@@ -7,8 +7,9 @@
 
 char *my_strncpy(char *dest, char const *src, int n)
 {
-    for (int i = 0; i < n; i++) {
+    int i = 0;
+
+    for (; i < n; i++)
         dest[i] = src[i];
-    }
     return (dest);
 }

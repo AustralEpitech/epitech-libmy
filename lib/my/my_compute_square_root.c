@@ -7,18 +7,9 @@
 
 int my_compute_square_root(int nb)
 {
-    int test;
-    int value = nb;
-    int sqrt_overflow = 46340;
-
-    if (nb / 2 > sqrt_overflow) {
-        value = sqrt_overflow;
-    }
-    for (int i = 0; i <= value; i++) {
-        test = i * i;
-        if (test == nb) {
+    for (int i = 0; i <= nb / 2; i++) {
+        if (i * i == nb)
             return (i);
-        }
     }
     return (0);
 }

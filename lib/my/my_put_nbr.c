@@ -5,13 +5,10 @@
 ** my_put_nbr
 */
 
-void my_putchar(char);
+void my_putchar(char c);
 
 int my_put_nbr(int nb)
 {
-    int nbr;
-    int i;
-
     if (nb < 0) {
         my_putchar('-');
         nb *= -1;
@@ -19,7 +16,6 @@ int my_put_nbr(int nb)
     if (nb > 9) {
         my_put_nbr(nb / 10);
         my_put_nbr(nb % 10);
-    } else {
+    } else
         my_putchar(nb + '0');
-    }
 }

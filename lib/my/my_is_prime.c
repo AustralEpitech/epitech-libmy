@@ -7,21 +7,11 @@
 
 int my_is_prime(int nb)
 {
-    int test;
-    int value = nb / 2;
-    int sqrt_overflow = 46340;
-
-    if (nb <= 1) {
+    if (nb <= 1)
         return (0);
-    }
-    if (value > sqrt_overflow) {
-        value = sqrt_overflow;
-    }
-    for (int i = 2; i <= value; i++) {
-        test = nb / i;
-        if (test * i == nb) {
+    for (int i = 2; i <= nb / 2; i++) {
+        if (nb / i * i == nb)
             return (0);
-        }
     }
     return (1);
 }

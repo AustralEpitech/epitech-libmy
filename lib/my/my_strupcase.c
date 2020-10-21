@@ -5,19 +5,11 @@
 ** my_strupcase
 */
 
-int my_strlen(char const *);
-
 char *my_strupcase(char *str)
 {
-    int len = my_strlen(str);
-    char c;
-
-    for (int i = 0; i < len; i++) {
-        c = str[i];
-        if (c <= 'z' && 'a' <= c) {
-            c = str[i] - 'a' + 'A';
-        }
-        str[i] = c;
+    for (int i = 0; str[i] != '\0'; i++) {
+        if ('a' <= str[i] && str[i] <= 'z')
+            str[i] -= 'a' - 'A';
     }
     return (str);
 }

@@ -5,19 +5,11 @@
 ** my_strlowcase
 */
 
-int my_strlen(char const *);
-
 char *my_strlowcase(char *str)
 {
-    int len = my_strlen(str);
-    char c;
-
-    for (int i = 0; i < len; i++) {
-        c = str[i];
-        if (c <= 'Z' && 'A' <= c) {
-            c = str[i] - 'A' + 'a';
-        }
-        str[i] = c;
+    for (int i = 0; str[i] != '\0'; i++) {
+        if ('A' <= str[i] && str[i] <= 'Z')
+            str[i] -= 'A' - 'a';
     }
     return (str);
 }

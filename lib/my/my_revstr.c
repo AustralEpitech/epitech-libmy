@@ -5,7 +5,7 @@
 ** my_revstr
 */
 
-int my_strlen(char const *);
+int my_strlen(char const *str);
 
 char *my_revstr(char *str)
 {

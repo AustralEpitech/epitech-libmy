@@ -5,14 +5,13 @@
 ** my_isneg
 */
 
-void my_putchar(char);
+void my_putchar(char c);
 
-int my_isneg(int n)
+int my_isneg(int nb)
 {
-    if (n < 0) {
+    if (nb < 0)
         my_putchar('N');
-    } else {
+    else
         my_putchar('P');
-    }
     return (0);
 }

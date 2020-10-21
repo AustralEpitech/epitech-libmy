@@ -5,14 +5,12 @@
 ** my_compute_power_rec
 */
 
-int my_compute_power_rec(int nb, int p)
+int my_compute_power_rec(int nb, int power)
 {
-    if (nb == 1 || p == 0) {
+    if (nb == 1 || power == 0)
         return (1);
-    }
-    if (p < 0 || nb == 0) {
+    if (power < 0 || nb == 0)
         return (0);
-    }
-    nb *= my_compute_power_rec(nb, p - 1);
+    nb *= my_compute_power_rec(nb, power - 1);
     return (nb);
 }
