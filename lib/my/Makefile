@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2020
-## cpool10
+## libmy
 ## File description:
 ## Makefile
 ##

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2020
-** cpool07
+** libmy
 ** File description:
 ** my_strcat
 */
