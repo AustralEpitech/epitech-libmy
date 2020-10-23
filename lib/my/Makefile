@@ -5,7 +5,8 @@
 ## Makefile
 ##
 
-SRC		=	my_putchar.c				\
+SRC		=	my_char_isnum.c				\
+			my_putchar.c				\
 			my_isneg.c					\
 			my_put_nbr.c				\
 			my_swap.c					\

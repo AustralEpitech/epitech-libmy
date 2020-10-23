@@ -8,6 +8,7 @@
 #ifndef MY_H_
 #define MY_H_
 
+int my_char_isnum(char c);
 void my_putchar(char c);
 int my_isneg(int nb);
 int my_put_nbr(int nb);

@@ -16,7 +16,7 @@ int my_strncmp(char const *s1, char const *s2, int n)
     if (len1 > len)
         len = len1;
     if (n < len)
-        len = len1;
+        len = n;
     for (int i = 0; i < len; i++) {
         diff = s1[i] - s2[i];
         if (diff != 0)
