@@ -16,9 +16,9 @@ int my_getnbr(char const *str)
     for (int i = 0; str[i] != '\0'; i++) {
         if (str[i] == '-')
             neg *= -1;
-        else if (!my_is_num(str[i]) && str[i] != '+')
+        else if (!my_char_isnum(str[i]) && str[i] != '+')
             neg = 1;
-        for (; my_is_num(str[i]); i++) {
+        for (; my_char_isnum(str[i]); i++) {
             nb = nb * 10 + str[i] - '0';
             test = 1;
         }
