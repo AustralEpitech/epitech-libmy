@@ -46,15 +46,14 @@ all:		$(NAME)
 $(NAME):	$(OBJ)
 	ar rc $(NAME) $(OBJ)
 	cp $(NAME) ..
-	mkdir ../../include
 	cp my.h ../../include
 
 clean:
 	rm -f $(OBJ)
+	rm -f $(NAME)
 
 fclean:		clean
 	rm -f ../$(NAME)
-	rm -rf ../../include
 
 re:			fclean all
 
