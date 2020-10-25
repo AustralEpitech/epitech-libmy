@@ -8,6 +8,7 @@
 int my_str_isnum(char const *str)
 {
     int i = 0;
+
     if (str[i] == '-')
         i++;
     for (; str[i] != '\0'; i++) {
