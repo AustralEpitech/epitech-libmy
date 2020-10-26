@@ -1,33 +1,28 @@
-##
-## EPITECH PROJECT, 2020
-## infinadd
-## File description:
-## Makefile
-##
+CFLAGS	=	-Iinclude -Llib -lmy -Wall -Wextra
 
-CFLAGS	=	-Iinclude -Llib -lmy
-
-SRC		=	infinadd.c		\
-			operations.c	\
-			tools.c
+SRC		=	
 
 OBJ		=	$(SRC:.c=.o)
 
-NAME	=	infin_add
+NAME	=	
 
-all:		$(NAME)
+.PHONY:	lib
 
-$(NAME):	$(OBJ)
-	make -C lib/my && make -C lib/my fclean
+all:		$(NAME) clean
+
+$(NAME):	lib $(OBJ)
 	gcc -o $(NAME) $(OBJ) $(CFLAGS)
+
+lib:
+	make -s -C lib/my && make -C lib/my clean
 
 clean:
 	rm -f $(OBJ)
+	make -C lib/my clean
 
 fclean:		clean
 	rm -f $(NAME)
+	make -C lib/my fclean
 
 re:			fclean all
-
-auteur:
-	echo $(USER) > auteur
+	make -C lib/my re
