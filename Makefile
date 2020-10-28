@@ -1,10 +1,16 @@
-CFLAGS	=	-Iinclude -Llib -lmy -Wall -Wextra
+LIBPATH		=	lib/my
 
-SRC		=	
+LIB			=	my
+
+INCLUDEPATH	=	include
+
+CFLAGS	=	-I$(INCLUDEPATH) -L$(LIBPATH)/.. -l$(LIB) -Wall -Wextra
+
+SRC		=
 
 OBJ		=	$(SRC:.c=.o)
 
-NAME	=	
+NAME	=
 
 .PHONY:	lib
 
@@ -14,15 +20,15 @@ $(NAME):	lib $(OBJ)
 	gcc -o $(NAME) $(OBJ) $(CFLAGS)
 
 lib:
-	make -s -C lib/my && make -C lib/my clean
+	make -s -C $(LIBPATH) && make -C $(LIBPATH) clean
 
 clean:
 	rm -f $(OBJ)
-	make -C lib/my clean
+	make -C $(LIBPATH) clean
 
 fclean:		clean
 	rm -f $(NAME)
-	make -C lib/my fclean
+	make -C $(LIBPATH) fclean
 
 re:			fclean all
-	make -C lib/my re
+	make -C $(LIBPATH) re
