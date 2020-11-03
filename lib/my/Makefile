@@ -46,7 +46,6 @@ all:		$(NAME)
 $(NAME):	$(OBJ)
 	ar rc $(NAME) $(OBJ)
 	cp $(NAME) ..
-	cp my.h ../../include
 
 clean:
 	rm -f $(OBJ)
