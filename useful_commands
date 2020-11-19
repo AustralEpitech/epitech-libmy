@@ -1,0 +1,8 @@
+df			disk free
+lsblk			ls block
+dd			disk duplicator
+uname			info
+pwd			current path location
+ip a			ip
+chown user:group	change ownership
+lspci			list all periphs
