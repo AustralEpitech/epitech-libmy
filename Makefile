@@ -1,14 +1,14 @@
 LIBPATH		=	lib/my
 
-LIB			=	my
+CFLAGS	=	-Iinclude -L$(LIBPATH)/.. -lmy
 
-INCLUDEPATH	=	include
-
-CFLAGS	=	-I$(INCLUDEPATH) -L$(LIBPATH)/.. -l$(LIB) -Wall -Wextra
-
-SRC		=
+SRC		=	sources/
 
 OBJ		=	$(SRC:.c=.o)
+
+TEST	=	tests/test_
+
+TESTOBJ	=	$(TEST:.c=.o)
 
 NAME	=
 
@@ -20,7 +20,7 @@ $(NAME):	lib $(OBJ)
 	gcc -o $(NAME) $(OBJ) $(CFLAGS)
 
 lib:
-	make -s -C $(LIBPATH) && make -C $(LIBPATH) clean
+	make -s -C $(LIBPATH)
 
 clean:
 	rm -f $(OBJ)
@@ -32,3 +32,9 @@ fclean:		clean
 
 re:			fclean all
 	make -C $(LIBPATH) re
+
+unit_test:	$(OBJ) $(TESTOBJ)
+	gcc $(TESTOBJ) $(OBJ) -o tests/unit_test $(CFLAGS) -lcriterion
+
+run_test:	unit_test
+	tests/unit_test

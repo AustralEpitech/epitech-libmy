@@ -44,17 +44,12 @@ NAME	=	libmy.a
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	ar rc $(NAME) $(OBJ)
-	cp $(NAME) ..
+	ar rc ../$(NAME) $(OBJ)
 
 clean:
 	rm -f $(OBJ)
-	rm -f $(NAME)
 
 fclean:		clean
 	rm -f ../$(NAME)
 
 re:			fclean all
-
-auteur:
-	echo $(USER) > auteur

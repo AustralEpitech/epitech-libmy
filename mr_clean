@@ -1,1 +1,0 @@
-find . -ignore_readdir_race \( -name "#*#" -o -name "*~" -o -name "*.gc*" -o -name "unit_tests" \) -delete
