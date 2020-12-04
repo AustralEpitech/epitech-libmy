@@ -24,7 +24,7 @@ int my_str_isupper(char const *str);
 int my_strlen(char const *str);
 char *my_strcat(char *dest, char const *src);
 int my_strcmp(char const *s1, char const *s2);
-char *my_strcpy(char *dest, char const *src);
+char *my_strdup(char *str);
 char *my_revstr(char *str);
 char *my_strlowcase(char *str);
 char *my_strupcase(char *str);

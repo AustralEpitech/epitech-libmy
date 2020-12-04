@@ -5,6 +5,8 @@
 ** my_str
 */
 
+#include <stdlib.h>
+
 int my_strlen(char const *str)
 {
     int i = 0;
@@ -40,14 +42,16 @@ int my_strcmp(char const *s1, char const *s2)
     return (0);
 }
 
-char *my_strcpy(char *dest, char const *src)
+char *my_strdup(char *src)
 {
     int i = 0;
+    char *res = NULL;
 
+    res = malloc(my_strlen(src) + 1);
     for (; src[i] != '\0'; i++)
-        dest[i] = src[i];
-    dest[i] = '\0';
-    return (dest);
+        res[i] = src[i];
+    res[i] = '\0';
+    return (res);
 }
 
 char *my_revstr(char *str)
