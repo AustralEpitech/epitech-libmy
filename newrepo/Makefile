@@ -1,4 +1,4 @@
-LIBPATH		=	lib/my
+LIBPATH	=	lib/my
 
 CFLAGS	=	-Iinclude -L$(LIBPATH)/.. -lmy
 

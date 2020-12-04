@@ -7,7 +7,7 @@
 
 int my_strlen(char const *str);
 
-int check(char *str, int index, char const *to_find)
+static int check(char *str, int index, char const *to_find)
 {
     int test = 1;
 
