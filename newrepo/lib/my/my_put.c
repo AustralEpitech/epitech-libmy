@@ -6,6 +6,7 @@
 */
 
 #include <unistd.h>
+#include <stdarg.h>
 
 int my_strlen(char const *str);
 
@@ -14,7 +15,7 @@ void my_putchar(char c)
     write(1, &c, 1);
 }
 
-int my_put_nbr(int nb)
+void my_put_nbr(int nb)
 {
     if (nb < 0) {
         my_putchar('-');
@@ -27,8 +28,37 @@ int my_put_nbr(int nb)
         my_putchar(nb + '0');
 }
 
-int my_putstr(char const *str)
+void my_putstr(char const *str)
 {
     write(1, str, my_strlen(str));
-    return (0);
+}
+
+static void print_var(char flag, va_list ap)
+{
+    switch(flag) {
+        case 'c':
+            return (my_putchar(va_arg(ap, int)));
+        case 's':
+            return (my_putstr(va_arg(ap, char *)));
+        case 'd':
+            return (my_put_nbr(va_arg(ap, int)));
+    }
+}
+
+void my_printf(char *format, ...)
+{
+    va_list ap;
+    int size = 0;
+
+    va_start(ap, format);
+    for (int i = 0; format[i] != '\0'; i++) {
+        for (size = i; format[size] != '%' && format[size] != '\0'; size++);
+        i += write(1, format, size);
+        size = 0;
+        if (format[i] == '%') {
+            i++;
+            print_var(format[i], ap);
+        }
+    }
+    va_end(ap);
 }
