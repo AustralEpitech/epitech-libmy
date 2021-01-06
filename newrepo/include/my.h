@@ -16,7 +16,7 @@ int my_is_prime(int nb);
 void my_putchar(char c);
 int my_put_nbr(int nb);
 int my_putstr(char const *str);
-int my_printf(char *format, ...);
+void my_printf(char const *format, ...);
 int my_str_isalpha(char const *str);
 int my_str_islower(char const *str);
 int my_str_isnum(char const *str);

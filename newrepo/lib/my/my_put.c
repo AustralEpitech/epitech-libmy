@@ -45,16 +45,16 @@ static void print_var(char flag, va_list ap)
     }
 }
 
-void my_printf(char *format, ...)
+void my_printf(char const *format, ...)
 {
     va_list ap;
-    int size = 0;
+    int s = 0;
 
     va_start(ap, format);
     for (int i = 0; format[i] != '\0'; i++) {
-        for (size = i; format[size] != '%' && format[size] != '\0'; size++);
-        i += write(1, format, size);
-        size = 0;
+        for (s = 0; format[s + i] != '%' && format[s + i] != '\0'; s++);
+        if (s)
+            i += write(1, format + i, s);
         if (format[i] == '%') {
             i++;
             print_var(format[i], ap);
