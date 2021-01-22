@@ -8,8 +8,6 @@
 #include <unistd.h>
 #include <stdarg.h>
 
-int my_strlen(char const *str);
-
 void my_putchar(char c)
 {
     write(1, &c, 1);
@@ -21,16 +19,14 @@ void my_put_nbr(int nb)
         my_putchar('-');
         nb *= -1;
     }
-    if (nb > 9) {
+    if (nb > 9)
         my_put_nbr(nb / 10);
-        my_put_nbr(nb % 10);
-    } else
-        my_putchar(nb + '0');
+    my_putchar(nb + '0');
 }
 
 void my_putstr(char const *str)
 {
-    write(1, str, my_strlen(str));
+    write(1, str, sizeof(str));
 }
 
 static void print_var(char flag, va_list ap)
@@ -48,13 +44,13 @@ static void print_var(char flag, va_list ap)
 void my_printf(char const *format, ...)
 {
     va_list ap;
-    int s = 0;
+    int size = 0;
 
     va_start(ap, format);
-    for (int i = 0; format[i] != '\0'; i++) {
-        for (s = 0; format[s + i] != '%' && format[s + i] != '\0'; s++);
-        if (s)
-            i += write(1, format + i, s);
+    for (int i = 0; format[i]; i++) {
+        for (size = 0; format[size + i] != '%' && format[size + i]; size++);
+        if (size)
+            i += write(1, format + i, size);
         if (format[i] == '%') {
             i++;
             print_var(format[i], ap);

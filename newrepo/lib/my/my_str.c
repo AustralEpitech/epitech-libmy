@@ -11,7 +11,7 @@ int my_strlen(char const *str)
 {
     int i = 0;
 
-    for (; str[i] != '\0'; i++);
+    for (; str[i]; i++);
     return (i);
 }
 
@@ -20,9 +20,9 @@ char *my_strcat(char *dest, char const *src)
     int len = my_strlen(dest);
     int i = 0;
 
-    for (; src[i] != '\0'; i++)
+    for (; src[i]; i++)
         dest[len + i] = src[i];
-    dest[len + i] = '\0';
+    dest[len + i];
     return (dest);
 }
 
@@ -30,13 +30,13 @@ int my_strcmp(char const *s1, char const *s2)
 {
     int len = my_strlen(s1);
     int len1 = my_strlen(s2);
-    int diff;
+    int diff = 0;
 
     if (len1 > len)
         len = len1;
     for (int i = 0; i < len; i++) {
         diff = s1[i] - s2[i];
-        if (diff != 0)
+        if (diff)
             return (diff);
     }
     return (0);
@@ -44,19 +44,19 @@ int my_strcmp(char const *s1, char const *s2)
 
 char *my_strdup(char *src)
 {
-    int i = 0;
     char *res = NULL;
+    int size = sizeof(src);
 
-    res = malloc(my_strlen(src) + 1);
-    for (; src[i] != '\0'; i++)
+    res = malloc(sizeof(src));
+    for (int i = 0; src[i]; i++)
         res[i] = src[i];
-    res[i] = '\0';
+    res[size] = 0;
     return (res);
 }
 
 char *my_revstr(char *str)
 {
-    char c;
+    char c = 0;
     int len = my_strlen(str) - 1;
 
     for (int i = 0; i < (len + 1) / 2; i++) {

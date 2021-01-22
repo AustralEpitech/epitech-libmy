@@ -11,7 +11,7 @@
 int my_compute_power_rec(int nb, int power);
 int my_compute_square_root(int nb);
 int my_getnbr(char const *str);
-int my_char_isnum(char c, int i);
+int my_char_isnum(char c);
 int my_is_prime(int nb);
 void my_putchar(char c);
 int my_put_nbr(int nb);
