@@ -31,7 +31,7 @@ void my_putstr(char const *str)
 
 static void print_var(char flag, va_list ap)
 {
-    switch(flag) {
+    switch (flag) {
         case 'c':
             return (my_putchar(va_arg(ap, int)));
         case 's':
