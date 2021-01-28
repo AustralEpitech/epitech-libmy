@@ -8,6 +8,8 @@
 #include <unistd.h>
 #include <stdarg.h>
 
+int my_strlen(char const *str);
+
 void my_putchar(char c)
 {
     write(1, &c, 1);
@@ -26,7 +28,7 @@ void my_put_nbr(int nb)
 
 void my_putstr(char const *str)
 {
-    write(1, str, sizeof(str));
+    write(1, str, my_strlen(str));
 }
 
 static void print_var(char flag, va_list ap)
