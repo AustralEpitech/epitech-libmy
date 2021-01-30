@@ -23,7 +23,7 @@ void my_put_nbr(int nb)
     }
     if (nb > 9)
         my_put_nbr(nb / 10);
-    my_putchar(nb + '0');
+    my_putchar(nb % 10 + '0');
 }
 
 void my_putstr(char const *str)
