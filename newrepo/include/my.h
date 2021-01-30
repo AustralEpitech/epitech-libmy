@@ -31,5 +31,6 @@ char *my_strlowcase(char *str);
 char *my_strupcase(char *str);
 char *my_strstr(char *str, char const *to_find);
 void my_swap(int *a, int *b);
+char **my_str_to_word_array(char *str, char sep);
 
 #endif /* MY_H_ */
