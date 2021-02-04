@@ -2,7 +2,7 @@ LIBPATH	=	lib/my
 
 CFLAGS	=	-Iinclude -L$(LIBPATH)/.. -lmy
 
-SRC		=	src/
+SRC		=	src/main.c
 
 OBJ		=	$(SRC:.c=.o)
 
@@ -14,7 +14,7 @@ NAME	=
 
 .PHONY:	lib
 
-all:		$(NAME)
+all:		$(NAME) clean
 
 $(NAME):	lib $(OBJ)
 	gcc -o $(NAME) $(OBJ) $(CFLAGS)

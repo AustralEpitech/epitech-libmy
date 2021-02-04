@@ -46,17 +46,14 @@ static void print_var(char flag, va_list ap)
 void my_printf(char const *format, ...)
 {
     va_list ap;
-    int size = 0;
 
     va_start(ap, format);
-    for (int i = 0; format[i]; i++) {
+    for (int i = 0, size = 0; format[i]; i++) {
         for (size = 0; format[size + i] != '%' && format[size + i]; size++);
         if (size)
-            i += write(1, format + i, size);
-        if (format[i] == '%') {
-            i++;
-            print_var(format[i], ap);
-        }
+            i += write(1, format + i, size) - 1;
+        else if (format[i] == '%')
+            print_var(format[++i], ap);
     }
     va_end(ap);
 }
