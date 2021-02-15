@@ -11,7 +11,8 @@ int my_strlen(char const *str)
 {
     int i = 0;
 
-    for (; str[i]; i++);
+    for (; str[i]; i++)
+        ;
     return (i);
 }
 
@@ -22,7 +23,7 @@ char *my_strcat(char *dest, char const *src)
 
     for (; src[i]; i++)
         dest[len + i] = src[i];
-    dest[len + i];
+    dest[len + i] = 0;
     return (dest);
 }
 
@@ -45,12 +46,12 @@ int my_strcmp(char const *s1, char const *s2)
 char *my_strdup(char *src)
 {
     char *res = NULL;
-    int size = sizeof(src);
+    int len = my_strlen(src);
 
-    res = malloc(sizeof(src));
+    res = malloc(len + 1);
+    res[len] = 0;
     for (int i = 0; src[i]; i++)
         res[i] = src[i];
-    res[size] = 0;
     return (res);
 }
 

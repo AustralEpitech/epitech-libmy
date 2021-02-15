@@ -5,16 +5,16 @@
 ## Makefile
 ##
 
-SRC		=	my_compute.c			\
-			my_getnbr.c				\
-			my_is.c					\
+SRC		=	my_char_is.c			\
+			my_compute.c			\
+			my_nbr.c				\
 			my_put.c				\
 			my_str_is.c				\
+			my_str_to_word_array.c	\
 			my_str.c				\
 			my_strcase.c			\
 			my_strstr.c				\
-			my_swap.c				\
-			my_str_to_word_array.c
+			my_swap.c
 
 OBJ		=	$(SRC:.c=.o)
 
