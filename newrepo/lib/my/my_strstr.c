@@ -17,7 +17,6 @@ static int check(char *str, char const *to_find)
 
 char *my_strstr(char *str, char const *to_find)
 {
-    int test = 0;
     int len = my_strlen(str);
     int to_findlen = my_strlen(to_find);
 
