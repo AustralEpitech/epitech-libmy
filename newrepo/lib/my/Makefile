@@ -5,8 +5,9 @@
 ## Makefile
 ##
 
-SRC		=	my_char_is.c			\
-			my_compute.c			\
+IPATH	=	../../include
+
+SRC		=	my_compute.c			\
 			my_nbr.c				\
 			my_put.c				\
 			my_str_is.c				\
@@ -18,17 +19,18 @@ SRC		=	my_char_is.c			\
 
 OBJ		=	$(SRC:.c=.o)
 
-NAME	=	libmy.a
+NAME	=	../libmy.a
 
 all:		$(NAME)
 
-$(NAME):	$(OBJ)
-	ar rc ../$(NAME) $(OBJ)
+$(NAME):
+	$(CC) -c $(SRC) -I$(IPATH)
+	ar rc $(NAME) $(OBJ)
 
 clean:
 	rm -f $(OBJ)
 
 fclean:		clean
-	rm -f ../$(NAME)
+	rm -f $(NAME)
 
 re:			fclean all

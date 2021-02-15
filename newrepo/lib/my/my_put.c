@@ -5,12 +5,14 @@
 ** my_put
 */
 
+#include "my.h"
 #include <stdarg.h>
 #include <unistd.h>
 
-int my_strlen(char const *str);
-
-int my_putchar(char c) { return (write(1, &c, 1)); }
+int my_putchar(char c)
+{
+    return (write(1, &c, 1));
+}
 
 int my_put_nbr(int nb)
 {
@@ -25,7 +27,10 @@ int my_put_nbr(int nb)
     return (len + my_putchar(nb % 10 + '0'));
 }
 
-int my_putstr(char const *str) { return (write(1, str, my_strlen(str))); }
+int my_putstr(char const *str)
+{
+    return (write(1, str, my_strlen(str)));
+}
 
 static int print_var(char flag, va_list ap)
 {

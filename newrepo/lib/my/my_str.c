@@ -5,14 +5,14 @@
 ** my_str
 */
 
+#include "my.h"
 #include <stdlib.h>
 
 int my_strlen(char const *str)
 {
     int i = 0;
 
-    for (; str[i]; i++)
-        ;
+    for (; str[i]; i++);
     return (i);
 }
 

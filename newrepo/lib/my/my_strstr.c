@@ -5,7 +5,7 @@
 ** my_strstr
 */
 
-int my_strlen(char const *str);
+#include "my.h"
 
 static int check(char *str, char const *to_find)
 {

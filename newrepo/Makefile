@@ -17,7 +17,7 @@ NAME	=
 all:		$(NAME) clean
 
 $(NAME):	lib $(OBJ)
-	gcc -o $(NAME) $(OBJ) $(CFLAGS)
+	$(CC) -o $(NAME) $(OBJ) $(CFLAGS)
 
 lib:
 	make -s -C $(LIBPATH)
@@ -35,5 +35,5 @@ re:			fclean all
 	make -C $(LIBPATH) re
 
 tests_run:	unit_test
-	gcc $(TESTOBJ) $(OBJ) -o tests/unit_test $(CFLAGS) -lcriterion --coverage
+	$(CC) $(TESTOBJ) $(OBJ) -o tests/unit_test $(CFLAGS) -lcriterion --coverage
 	tests/unit_test
