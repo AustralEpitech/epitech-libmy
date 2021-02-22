@@ -24,8 +24,9 @@
 
 #define ABS(n)      n < 0 ? -n : n
 
+
 ////////////////
-// Prototypes //
+// Functions  //
 ////////////////
 
 // my_compute
