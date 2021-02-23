@@ -14,16 +14,16 @@
 
 // Char
 
-#define ISPRINT(c)  32 <= c && c <= 126
-#define ISNUM(c)    '0' <= c && c <= '9'
-#define ISUP(c)     'A' <= c && c <= 'Z'
-#define ISLOW(c)    'a' <= c && c <= 'z'
-#define ISALPHA(c)  ISUP(c) || ISLOW(c)
+#define ISPRINT(c) (32 <= c && c <= 126)
+#define ISNUM(c) ('0' <= c && c <= '9')
+#define ISUP(c) ('A' <= c && c <= 'Z')
+#define ISLOW(c) ('a' <= c && c <= 'z')
+#define ISALPHA(c) (ISUP(c) || ISLOW(c))
 
 // Nb
 
-#define ABS(n)      n < 0 ? -n : n
-
+#define ABS(n) (n < 0 ? -n : n)
+#define ROUNDUP(n) ((int)(n + 1))
 
 ////////////////
 // Functions  //
