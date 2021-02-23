@@ -21,7 +21,7 @@ int my_str_isnum(char const *str)
 
     if (str[i] == '-')
         i++;
-    while (str[i++])
+    for (; str[i]; i++)
         if (!ISNUM(str[i]))
             return (0);
     return (1);
