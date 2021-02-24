@@ -21,7 +21,7 @@ char *my_strstr(char *str, char const *to_find)
     int to_findlen = my_strlen(to_find);
 
     for (int i = 0; i <= len - to_findlen; i++)
-            if (check(str + i, to_find))
-                return (str + i);
+        if (check(str + i, to_find))
+            return (str + i);
     return ((void *)0);
 }

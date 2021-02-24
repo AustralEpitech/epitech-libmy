@@ -35,12 +35,12 @@ int my_putstr(char const *str)
 static int print_var(char flag, va_list ap)
 {
     switch (flag) {
-    case 'c':
-        return (my_putchar(va_arg(ap, int)));
-    case 's':
-        return (my_putstr(va_arg(ap, char *)));
-    case 'd':
-        return (my_put_nbr(va_arg(ap, int)));
+        case 'c':
+            return (my_putchar(va_arg(ap, int)));
+        case 's':
+            return (my_putstr(va_arg(ap, char *)));
+        case 'd':
+            return (my_put_nbr(va_arg(ap, int)));
     }
 }
 
