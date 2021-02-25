@@ -10,8 +10,7 @@
 
 static int is_sep(char c, char next, char sep, char skip)
 {
-    if (c == sep && next)
-        if (next != skip && next != sep)
+    if (c == sep && next != sep)
             return (1);
     return (0);
 }
