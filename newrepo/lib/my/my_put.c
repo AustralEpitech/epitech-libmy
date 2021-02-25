@@ -51,8 +51,7 @@ int my_printf(char const *format, ...)
 
     va_start(ap, format);
     for (int i = 0, size = 0; format[i]; i++) {
-        for (size = 0; format[size + i] != '%' && format[size + i]; size++)
-            ;
+        for (size = 0; format[size + i] != '%' && format[size + i]; size++);
         if (size) {
             i += write(1, format + i, size) - 1;
             len += size;
