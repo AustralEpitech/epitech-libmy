@@ -25,9 +25,9 @@
 #define ABS(n) (n < 0 ? -n : n)
 #define ROUNDUP(n) ((int)(n + 1))
 
-////////////////
-// Functions  //
-////////////////
+///////////////
+// Functions //
+///////////////
 
 // my_compute
 
