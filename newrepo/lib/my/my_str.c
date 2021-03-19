@@ -34,7 +34,7 @@ int my_strcmp(char const *s1, char const *s2)
     while (*s1)
         if (diff = *(s1++) - *(s2++))
             return (diff);
-    return (*(s1++) - *(s2++));
+    return (*s1 - *s2);
 }
 
 char *my_strdup(char *src)
