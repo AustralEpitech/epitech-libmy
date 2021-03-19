@@ -29,12 +29,10 @@ char *my_strcat(char *dest, char const *src)
 
 int my_strcmp(char const *s1, char const *s2)
 {
-    int diff = 0;
-
-    while (*s1)
-        if (diff = *(s1++) - *(s2++))
-            return (diff);
-    return (*s1 - *s2);
+    if (!(s1 && s2))
+        return (-1);
+    while (!(*s1++ - *s2++) && *s1 && *s2);
+    return (*--s1 - *--s2);
 }
 
 char *my_strdup(char *src)
