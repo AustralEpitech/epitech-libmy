@@ -51,8 +51,9 @@ char *my_revstr(char *str)
 {
     char c = 0;
     int len = my_strlen(str) - 1;
+    int stop = (len + 1) / 2;
 
-    for (int i = 0; i < (len + 1) / 2; i++) {
+    for (int i = 0; i < stop; i++) {
         c = str[i];
         str[i] = str[len - i];
         str[len - i] = c;

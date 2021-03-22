@@ -23,9 +23,11 @@ int my_getnbr(char const *str)
 
 int my_is_prime(int nb)
 {
+    int stop = nb / 2;
+
     if (nb <= 1)
         return (0);
-    for (int i = 2; i <= nb / 2; i++)
+    for (int i = 2; i <= stop; i++)
         if (nb / i * i == nb)
             return (0);
     return (1);

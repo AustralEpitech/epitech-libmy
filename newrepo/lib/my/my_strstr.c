@@ -17,10 +17,9 @@ static int check(char *str, char const *to_find)
 
 char *my_strstr(char *str, char const *to_find)
 {
-    int len = my_strlen(str);
-    int to_findlen = my_strlen(to_find);
+    int stop = my_strlen(str) - my_strlen(to_find);
 
-    for (int i = 0; i <= len - to_findlen; i++)
+    for (int i = 0; i <= stop; i++)
         if (check(str + i, to_find))
             return (str + i);
     return ((char *)0);
