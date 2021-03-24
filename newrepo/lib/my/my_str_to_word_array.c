@@ -11,8 +11,8 @@
 static int is_sep(char c, char next, char sep, char skip)
 {
     if (c == sep && next != sep)
-        return (1);
-    return (0);
+        return 1;
+    return 0;
 }
 
 static int my_strlen_sep(char *str, char sep, char skip)
@@ -23,14 +23,14 @@ static int my_strlen_sep(char *str, char sep, char skip)
     for (; str[i] && str[i] != sep; i++)
         if (str[i] != skip)
             count++;
-    return (count);
+    return count;
 }
 
 static char **end_str(char **sstr, int i, int j)
 {
     sstr[i][j] = 0;
     sstr[++i] = NULL;
-    return (sstr);
+    return sstr;
 }
 
 char **my_str_to_word_array(char *str, char sep, char skip)
@@ -54,5 +54,5 @@ char **my_str_to_word_array(char *str, char sep, char skip)
             sstr[i] = malloc(my_strlen_sep(str + index + 1, sep, skip) + 1);
         }
     }
-    return (end_str(sstr, i, j));
+    return end_str(sstr, i, j);
 }

@@ -13,7 +13,7 @@ int my_strlen(char const *str)
     int i = 0;
 
     for (; str[i]; i++);
-    return (i);
+    return i;
 }
 
 char *my_strcat(char *dest, char const *src)
@@ -24,15 +24,15 @@ char *my_strcat(char *dest, char const *src)
     for (; src[i]; i++)
         dest[len + i] = src[i];
     dest[len + i] = 0;
-    return (dest);
+    return dest;
 }
 
 int my_strcmp(char const *s1, char const *s2)
 {
     if (!(s1 && s2))
-        return (-1);
+        return -1;
     while (!(*s1++ - *s2++) && *s1 && *s2);
-    return (*--s1 - *--s2);
+    return *--s1 - *--s2;
 }
 
 char *my_strdup(char *src)
@@ -44,7 +44,7 @@ char *my_strdup(char *src)
     res[len] = 0;
     for (int i = 0; src[i]; i++)
         res[i] = src[i];
-    return (res);
+    return res;
 }
 
 char *my_revstr(char *str)
@@ -58,5 +58,5 @@ char *my_revstr(char *str)
         str[i] = str[len - i];
         str[len - i] = c;
     }
-    return (str);
+    return str;
 }

@@ -11,7 +11,7 @@
 
 int my_putchar(char c)
 {
-    return (write(1, &c, 1));
+    return write(1, &c, 1);
 }
 
 int my_put_nbr(int nb)
@@ -24,23 +24,23 @@ int my_put_nbr(int nb)
     }
     if (nb > 9)
         len += my_put_nbr(nb / 10);
-    return (len + my_putchar(nb % 10 + '0'));
+    return len + my_putchar(nb % 10 + '0');
 }
 
 int my_putstr(char const *str)
 {
-    return (write(1, str, my_strlen(str)));
+    return write(1, str, my_strlen(str));
 }
 
 static int print_var(char flag, va_list ap)
 {
     switch (flag) {
         case 'c':
-            return (my_putchar(va_arg(ap, int)));
+            return my_putchar(va_arg(ap, int));
         case 's':
-            return (my_putstr(va_arg(ap, char *)));
+            return my_putstr(va_arg(ap, char *));
         case 'd':
-            return (my_put_nbr(va_arg(ap, int)));
+            return my_put_nbr(va_arg(ap, int));
     }
 }
 
@@ -59,5 +59,5 @@ int my_printf(char const *format, ...)
             len += print_var(format[++i], ap);
     }
     va_end(ap);
-    return (len);
+    return len;
 }

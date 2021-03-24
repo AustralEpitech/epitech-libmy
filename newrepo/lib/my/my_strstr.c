@@ -11,8 +11,8 @@ static int check(char *str, char const *to_find)
 {
     for (int i = 0; to_find[i]; i++)
         if (str[i] != to_find[i])
-            return (0);
-    return (1);
+            return 0;
+    return 1;
 }
 
 char *my_strstr(char *str, char const *to_find)
@@ -21,6 +21,6 @@ char *my_strstr(char *str, char const *to_find)
 
     for (int i = 0; i <= stop; i++)
         if (check(str + i, to_find))
-            return (str + i);
-    return ((char *)0);
+            return str + i;
+    return (char *)0;
 }
