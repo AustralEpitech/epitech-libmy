@@ -10,7 +10,7 @@ LIBPATH	=	lib/my
 CFLAGS	=	-Iinclude -L$(LIBPATH)/.. -lmy
 
 SRC		=	src/main.c		\
-			src/%%PROJ%%
+			src/%%PROJ%%.c
 
 OBJ		=	$(SRC:.c=.o)
 
@@ -20,22 +20,24 @@ TESTOBJ	=	$(TEST:.c=.o)
 
 NAME	=	%%PROJ%%
 
-all:		$(NAME) clean
+.PHONY: 	lib
 
-$(NAME):	lib $(OBJ)
+all:		lib $(NAME)
+
+$(NAME):	$(OBJ)
 	$(CC) -o $(NAME) $(OBJ) $(CFLAGS)
 
 lib:
-	make -C $(LIBPATH)
+	$(MAKE) -C $(LIBPATH)
 
 clean:
 	rm -f $(OBJ)
 	rm -f $(TESTOBJ)
-	make -C $(LIBPATH) clean
+	$(MAKE) -C $(LIBPATH) clean
 
 fclean:		clean
 	rm -f $(NAME)
-	make -C $(LIBPATH) fclean
+	$(MAKE) -C $(LIBPATH) fclean
 
 re:			fclean all
 

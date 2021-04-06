@@ -5,6 +5,8 @@
 ** %%PROJ%%
 */
 
+#include "my.h"
+
 int %%PROJ%%(void)
 {
     return 0;

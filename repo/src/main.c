@@ -5,6 +5,8 @@
 ** main
 */
 
+int %%PROJ%%(void);
+
 int main(void)
 {
     return %%PROJ%%();
