@@ -4,10 +4,14 @@ SRC=$(dirname $0)/
 
 get_answer () {
     case $1 in
-        "") ANSWER="Y";;
-        [Nn] | [Nn][Oo]) ANSWER="N";;
-        [Yy] | [Yy][Ee][Ss]) ANSWER="Y";;
-        *) ANSWER="";;
+        "")
+            ANSWER="Y";;
+        [Nn] | [Nn][Oo])
+            ANSWER="N";;
+        [Yy] | [Yy][Ee][Ss])
+            ANSWER="Y";;
+        *)
+            ANSWER="";;
     esac
 }
 
@@ -37,8 +41,6 @@ fi
 cp -r $SRC/repo $DIR
 rename %%PROJ%% $NAME $DIR/**/*
 
-for FILE in $(find $DIR -type f); do
-    sed -i "s/%%PROJ%%/$NAME/g" $FILE
-done
+find $DIR -type f -execdir sed -i "s/%%PROJ%%/$NAME/g" "{}" +
 
 echo "DONE"
