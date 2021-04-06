@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-IPATH	=	../../include
+CFLAGS	=	-I../../include
 
 SRC		=	my_compute.c			\
 			my_nbr.c				\
@@ -14,8 +14,7 @@ SRC		=	my_compute.c			\
 			my_str_to_word_array.c	\
 			my_str.c				\
 			my_strcase.c			\
-			my_strstr.c				\
-			my_swap.c
+			my_strstr.c
 
 OBJ		=	$(SRC:.c=.o)
 
@@ -23,8 +22,7 @@ NAME	=	../libmy.a
 
 all:		$(NAME)
 
-$(NAME):
-	$(CC) -c $(SRC) -I$(IPATH)
+$(NAME):	$(OBJ)
 	ar rc $(NAME) $(OBJ)
 
 clean:

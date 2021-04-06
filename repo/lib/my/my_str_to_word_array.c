@@ -5,7 +5,6 @@
 ** my_str_to_word_array
 */
 
-#include "my.h"
 #include <stdlib.h>
 
 static int is_sep(char c, char next, char sep, char skip)

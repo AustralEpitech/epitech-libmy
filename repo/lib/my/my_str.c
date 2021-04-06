@@ -5,7 +5,6 @@
 ** my_str
 */
 
-#include "my.h"
 #include <stdlib.h>
 
 int my_strlen(char const *str)

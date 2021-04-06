@@ -1,0 +1,44 @@
+#!/bin/bash
+
+SRC=$(dirname $0)/
+
+get_answer () {
+    case $1 in
+        "") ANSWER="Y";;
+        [Nn] | [Nn][Oo]) ANSWER="N";;
+        [Yy] | [Yy][Ee][Ss]) ANSWER="Y";;
+        *) ANSWER="";;
+    esac
+}
+
+NAME=$1
+
+while [ -z $NAME ]; do
+    echo -n "Name: "
+    if ! read NAME; then echo; fi
+done
+
+DIR=$SRC../$NAME
+
+ANSWER=""
+
+if [ -d $DIR ]; then
+    while [ -z $ANSWER ]; do
+        echo -n "$NAME exists. Replace? [Y/n] "
+        read -r ANSWER
+        get_answer $ANSWER
+        if [[ $ANSWER && $ANSWER == "N" ]]; then
+            exit
+        fi
+    done
+    rm -rf $DIR
+fi
+
+cp -r $SRC/repo $DIR
+rename %%PROJ%% $NAME $DIR/**/*
+
+for FILE in $(find $DIR -type f); do
+    sed -i "s/%%PROJ%%/$NAME/g" $FILE
+done
+
+echo "DONE"

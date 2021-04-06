@@ -5,8 +5,6 @@
 ** my_compute
 */
 
-#include "my.h"
-
 int my_compute_power_rec(int nb, int power)
 {
     if (nb == 1 || !power)
