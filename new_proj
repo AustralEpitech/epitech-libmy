@@ -41,6 +41,6 @@ fi
 cp -r $SRC/repo $DIR
 rename %%PROJ%% $NAME $DIR/**/*
 
-find $DIR -type f -execdir sed -i "s/%%PROJ%%/$NAME/g" "{}" +
+find $DIR -type "f" -exec sed -i "s/%%PROJ%%/$NAME/g; s/%%PROJ_UP%%/${NAME^^}/g" "{}" +
 
 echo "DONE"

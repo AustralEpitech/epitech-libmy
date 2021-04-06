@@ -1,8 +1,8 @@
 /*
-** EPITECH PROJECT, 2020
+** EPITECH PROJECT, 2021
 ** libmy
 ** File description:
-** my_getnbr
+** my_nbr
 */
 
 #include "my.h"

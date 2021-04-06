@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2020
+** EPITECH PROJECT, 2021
 ** libmy
 ** File description:
 ** my
@@ -74,4 +74,4 @@
     // my_strstr
 
     char *my_strstr(char *str, char const *to_find);
-#endif /* MY_H_ */
+#endif /* !MY_H_ */
