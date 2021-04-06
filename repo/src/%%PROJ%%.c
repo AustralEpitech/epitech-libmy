@@ -5,7 +5,7 @@
 ** %%PROJ%%
 */
 
-#include "my.h"
+#include "%%PROJ%%.h"
 
 int %%PROJ%%(void)
 {
