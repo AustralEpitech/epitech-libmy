@@ -1,13 +1,17 @@
 #!/bin/bash
 
-SRC=$(dirname $0)/
+SRC=$(dirname $0)/repo
 
 get_answer () {
-    case $1 in
-        "" | [Yy] | [Yy][Ee][Ss])
-            ANSWER="Y";;
-        [Nn] | [Nn][Oo])
+    case ${1^^} in
+        "" | N | NO)
             ANSWER="N";;
+        Y | YES)
+            ANSWER="Y";;
+        LIB)
+            ANSWER="lib";;
+        CLEAN)
+            ANSWER="clean";;
         *)
             ANSWER="";;
     esac
@@ -19,23 +23,30 @@ while [ -z $NAME ]; do
     if ! read -p "Name: " NAME; then echo; fi
 done
 
-DIR=$SRC../$NAME
+CPFLAGS="-rpv"
 
-FLAGS="-rp"
-
-if [ -d $DIR ]; then
+if [ -d $NAME ]; then
     while [ -z $ANSWER ]; do
-        read -r -p "$NAME exists. Replace files? [Y/n] " ANSWER
+        read -p "$NAME exists. Replace files? [N/y/lib/clean] " ANSWER
         get_answer $ANSWER
         if [[ $ANSWER == "N" ]]; then
-            FLAGS+="n"
+            CPFLAGS+="n"
+        elif [[ $ANSWER == "clean" ]]; then
+            echo -e "\n\033[1mRM ALL\033[0m"
+            rm -rfv ${NAME/$(ls -A $NAME |grep -wv ".git")}
         fi
     done
 fi
 
-cp $FLAGS $SRC/repo/. $DIR
-rename %%PROJ%% $NAME $DIR/**/*
+echo -e "\n\033[1mCOPY\033[0m"
+if [[ $ANSWER == "lib" ]]; then
+    cp $CPFLAGS $SRC/lib/. $NAME/lib
+else
+    cp $CPFLAGS $SRC/. $NAME
+    echo -e "\n\033[1mRENAME FILES\033[0m"
+    rename -v %%PROJ%% $NAME $NAME/**/*
+    echo -e "\n\033[1mRENAME CONTENT\033[0m"
+    find $NAME -path "$NAME/lib" -prune -o -type "f" -exec sed -i "s/%%PROJ%%/$NAME/g; s/%%PROJ_UP%%/${NAME^^}/g" "{}" + -print
+fi
 
-find $DIR -type "f" -exec sed -i "s/%%PROJ%%/$NAME/g; s/%%PROJ_UP%%/${NAME^^}/g" "{}" +
-
-echo "DONE"
+echo -e "\n\033[1mDONE\033[0m"
