@@ -4,12 +4,10 @@ SRC=$(dirname $0)/
 
 get_answer () {
     case $1 in
-        "")
+        "" | [Yy] | [Yy][Ee][Ss])
             ANSWER="Y";;
         [Nn] | [Nn][Oo])
             ANSWER="N";;
-        [Yy] | [Yy][Ee][Ss])
-            ANSWER="Y";;
         *)
             ANSWER="";;
     esac
@@ -18,27 +16,24 @@ get_answer () {
 NAME=$1
 
 while [ -z $NAME ]; do
-    echo -n "Name: "
-    if ! read NAME; then echo; fi
+    if ! read -p "Name: " NAME; then echo; fi
 done
 
 DIR=$SRC../$NAME
 
-ANSWER=""
+FLAGS="-rp"
 
 if [ -d $DIR ]; then
     while [ -z $ANSWER ]; do
-        echo -n "$NAME exists. Replace? [Y/n] "
-        read -r ANSWER
+        read -r -p "$NAME exists. Replace files? [Y/n] " ANSWER
         get_answer $ANSWER
-        if [[ $ANSWER && $ANSWER == "N" ]]; then
-            exit
+        if [[ $ANSWER == "N" ]]; then
+            FLAGS+="n"
         fi
     done
-    rm -rf $DIR
 fi
 
-cp -r $SRC/repo $DIR
+cp $FLAGS $SRC/repo/. $DIR
 rename %%PROJ%% $NAME $DIR/**/*
 
 find $DIR -type "f" -exec sed -i "s/%%PROJ%%/$NAME/g; s/%%PROJ_UP%%/${NAME^^}/g" "{}" +
