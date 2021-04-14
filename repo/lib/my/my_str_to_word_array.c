@@ -9,9 +9,7 @@
 
 static int is_sep(char c, char next, char sep, char skip)
 {
-    if (c == sep && next != sep)
-        return 1;
-    return 0;
+    return c == sep && next != sep;
 }
 
 static int my_strlen_sep(char *str, char sep, char skip)
