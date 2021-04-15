@@ -41,6 +41,6 @@ fclean:		clean
 
 re:			fclean all
 
-tests_run:	unit_test
+tests_run:
 	$(CC) $(TESTOBJ) $(OBJ) -o tests/unit_test $(CFLAGS) -lcriterion --coverage
 	tests/unit_test
