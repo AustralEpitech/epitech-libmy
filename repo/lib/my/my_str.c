@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 
-size_t my_strlen(char const *str)
+int my_strlen(char const *str)
 {
     size_t i = 0;
 
@@ -34,7 +34,7 @@ int my_strcmp(char const *s1, char const *s2)
     return *--s1 - *--s2;
 }
 
-char *my_strdup(char *src)
+char *my_strdup(char const *src)
 {
     char *res = NULL;
     size_t len = my_strlen(src);

@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-static int check(char *str, char const *to_find)
+static int check(char const *str, char const *to_find)
 {
     for (int i = 0; to_find[i]; i++)
         if (str[i] != to_find[i])
@@ -15,7 +15,7 @@ static int check(char *str, char const *to_find)
     return 1;
 }
 
-char *my_strstr(char *str, char const *to_find)
+char *my_strstr(char const *str, char const *to_find)
 {
     int stop = my_strlen(str) - my_strlen(to_find);
 

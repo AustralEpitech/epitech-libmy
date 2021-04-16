@@ -63,7 +63,7 @@
     int my_strlen(char const *str);
     char *my_strcat(char *dest, char const *src);
     int my_strcmp(char const *s1, char const *s2);
-    char *my_strdup(char *src);
+    char *my_strdup(char const *src);
     char *my_revstr(char *str);
 
     // my_strcase

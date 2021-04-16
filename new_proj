@@ -24,7 +24,7 @@ while [ -z $NAME ]; do
     if ! read -p "Name: " NAME; then echo; fi
 done
 
-if [[ -d $NAME && -n $(ls -A $NAME) ]]; then
+if [[ -d $NAME && -n $(ls -A $NAME |grep -wv ".git") ]]; then
     while [ -z $ANSWER ]; do
         read -p "$NAME exists. Replace files? [N/y/lib/clean] " ANSWER
         get_answer $ANSWER
@@ -48,7 +48,7 @@ else
         cp $CPFLAGS $FILE $(echo $FILE |sed "s/%%PROJ%%/${NAME}/g; s@${SRC}@${NAME}@g")
     done
     echo -e "\n\033[1mFILE CONTENT\033[0m"
-    find $NAME -path "$NAME/lib" -prune -o -type "f" -exec sed -i "s/%%PROJ%%/$NAME/g; s/%%PROJ_UP%%/${NAME^^}/g" "{}" + -print
+    find $NAME -path "$NAME/lib" -prune -o -type "f" ! -path "$NAME/.git/*" -exec sed -i "s/%%PROJ%%/$NAME/g; s/%%PROJ_UP%%/${NAME^^}/g" "{}" + -print
 fi
 
 echo -e "\n\033[1mDONE\033[0m"
