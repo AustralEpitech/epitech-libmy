@@ -27,10 +27,8 @@ TNAME	=	tests/unit_test
 
 all:		$(NAME)
 
-lib:
+$(NAME):	$(MAIN) $(OBJ)
 	$(MAKE) -C $(LPATH)
-
-$(NAME):	$(MAIN) $(OBJ) lib
 	$(CC) -o $(NAME) $(MAIN) $(OBJ)
 
 clean:
@@ -43,7 +41,8 @@ fclean:		clean
 
 re:			fclean all
 
-tests_run:	fclean $(OBJ) $(TOBJ) lib
+tests_run:	fclean $(OBJ) $(TOBJ)
+	$(MAKE) -C $(LPATH)
 	$(CC) -o $(TNAME) $(TOBJ) $(OBJ) $(TFLAGS)
 	tests/unit_test
 
