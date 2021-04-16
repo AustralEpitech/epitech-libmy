@@ -17,7 +17,7 @@ OBJ		=	$(SRC:.c=.o)
 
 NAME	=	%%PROJ%%
 
-TFLAGS	=	-lcriterion --coverage
+TFLAGS	=	$(CFLAGS) -lcriterion --coverage
 
 TESTS	=	tests/test_%%PROJ%%.c
 
@@ -29,7 +29,7 @@ all:		$(NAME)
 
 $(NAME):	$(MAIN) $(OBJ)
 	$(MAKE) -C $(LPATH)
-	$(CC) -o $(NAME) $(MAIN) $(OBJ)
+	$(CC) -o $(NAME) $(MAIN) $(OBJ) $(CFLAGS)
 
 clean:
 	rm -f $(MAIN) $(OBJ) $(TOBJ) tests/*.gc*
