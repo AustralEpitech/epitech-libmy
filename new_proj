@@ -1,7 +1,5 @@
 #!/bin/bash
 
-SRC=$(dirname $0)/repo
-
 get_answer () {
     case ${1^^} in
         "" | N | NO)
@@ -17,15 +15,16 @@ get_answer () {
     esac
 }
 
+SRC=$(dirname $0)/repo
 NAME=$1
+
+CPFLAGS="-v"
 
 while [ -z $NAME ]; do
     if ! read -p "Name: " NAME; then echo; fi
 done
 
-CPFLAGS="-rpv"
-
-if [ -d $NAME ]; then
+if [[ -d $NAME && -n $(ls -A $NAME) ]]; then
     while [ -z $ANSWER ]; do
         read -p "$NAME exists. Replace files? [N/y/lib/clean] " ANSWER
         get_answer $ANSWER
@@ -40,12 +39,15 @@ fi
 
 echo -e "\n\033[1mCOPY\033[0m"
 if [[ $ANSWER == "lib" ]]; then
-    cp $CPFLAGS $SRC/lib/. $NAME/lib
+    cp -rv $SRC/lib/. $NAME/lib
 else
-    cp $CPFLAGS $SRC/. $NAME
-    echo -e "\n\033[1mRENAME FILES\033[0m"
-    rename -v %%PROJ%% $NAME $NAME/**/*
-    echo -e "\n\033[1mRENAME CONTENT\033[0m"
+    for DIR in $(find $SRC -type "d"); do
+        mkdir $(echo $DIR |sed "s@${SRC}@${NAME}@g") 2> /dev/null
+    done
+    for FILE in $(find $SRC/ -type "f"); do
+        cp $CPFLAGS $FILE $(echo $FILE |sed "s/%%PROJ%%/${NAME}/g; s@${SRC}@${NAME}@g")
+    done
+    echo -e "\n\033[1mFILE CONTENT\033[0m"
     find $NAME -path "$NAME/lib" -prune -o -type "f" -exec sed -i "s/%%PROJ%%/$NAME/g; s/%%PROJ_UP%%/${NAME^^}/g" "{}" + -print
 fi
 
