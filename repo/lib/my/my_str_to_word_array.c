@@ -21,20 +21,22 @@ static int my_strlen_sep(char const **str, char sep, char skip)
 {
     int size = 0;
 
-    while(**str && *(*str)++ != sep)
-        size += !is_sep(*str, 0, sep, skip);
-    return size + 1;
+    while (!VALID(**str))
+        (*str)++;
+    for (; **str && **str != sep; (*str)++)
+        size += **str != skip;
+    return size;
 }
 
-static int size_words(char const **str, char sep, char skip)
+static int count_words(char const **str, char sep, char skip)
 {
-    int size = 0;
+    int size = 1;
 
     while (!VALID(**str))
         (*str)++;
     for (int i = 0; (*str)[i]; i++)
         size += is_sep(*str, i, sep, skip);
-    return size ? size + 1 : 0;
+    return size;
 }
 
 static char **init_arr(char const *str, char sep, char skip, int size)
@@ -48,7 +50,8 @@ static char **init_arr(char const *str, char sep, char skip, int size)
     arr[size] = NULL;
     for (int i = 0; i < size && len != -1; i++) {
         len = my_strlen_sep(&str, sep, skip);
-        arr[i] = malloc(len + 2);
+        arr[i] = malloc(len + 1);
+        arr[i][len] = 0;
         if (!arr[i])
             len = -1;
     }
@@ -63,23 +66,17 @@ static char **init_arr(char const *str, char sep, char skip, int size)
 
 char **my_str_to_word_array(char const *str, char sep, char skip)
 {
-    int size = size_words(&str, sep, skip);
-    char **arr = NULL;
-    int i = 0;
+    char **arr = init_arr(str, sep, skip, count_words(&str, sep, skip));
     int j = 0;
 
-    if (!size)
-        return NULL;
-    arr = init_arr(str, sep, skip, size);
     if (!arr)
         return NULL;
-    for (int index = 0; str[index]; index++)
-        if (VALID(str[index]))
-            arr[i][j++] = str[index];
-        else if (is_sep(str, index, sep, skip)) {
-            arr[i++][j] = 0;
+    for (int i = 0; *str; str++)
+        if (VALID(*str))
+            arr[i][j++] = *str;
+        else if (is_sep(str, 0, sep, skip)) {
+            i++;
             j = 0;
         }
-    arr[size - 1][j] = 0;
     return arr;
 }
