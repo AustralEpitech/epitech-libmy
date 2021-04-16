@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2021
-** %%PROJ
+** %%PROJ%%
 ** File description:
 ** test_%%PROJ%%
 */
