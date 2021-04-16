@@ -73,5 +73,5 @@
 
     // my_strstr
 
-    char *my_strstr(char const *str, char const *to_find);
+    char *my_strstr(char *str, char const *to_find);
 #endif /* !MY_H_ */
