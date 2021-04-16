@@ -17,8 +17,7 @@ int my_str_isprintable(char const *str)
 
 int my_str_isnum(char const *str)
 {
-    if (*str == '-')
-        str++;
+    str += *str == '-';
     for (int i = 0; str[i]; i++)
         if (!ISNUM(str[i]))
             return 0;

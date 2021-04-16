@@ -7,49 +7,80 @@
 
 #include <stdlib.h>
 
-static int is_sep(char c, char next, char sep, char skip)
+#define VALID(c) !(c == sep || c == skip)
+
+static int is_sep(char const *str, int i, char sep, char skip)
 {
-    return c == sep && next != sep;
+    if (str[i++] != sep)
+        return 0;
+    for (; str[i] == skip; i++);
+    return str[i] != sep && str[i];
 }
 
-static int my_strlen_sep(char *str, char sep, char skip)
+static int my_strlen_sep(char const *str, char sep, char skip)
 {
-    int count = 0;
-    int i = 0;
+    int size = 0;
 
-    for (; str[i] && str[i] != sep; i++)
-        if (str[i] != skip)
-            count++;
-    return count;
+    for (int i = 0; str[i] && str[i] != sep; i++)
+        size += !is_sep(str, i, sep, skip);
+    return size;
 }
 
-static char **end_str(char **sstr, int i, int j)
+static int size_words(char const **str, char sep, char skip)
 {
-    sstr[i][j] = 0;
-    sstr[++i] = NULL;
-    return sstr;
+    int size = 0;
+
+    while (!VALID(**str))
+        *(*str)++;
+    for (int i = 0; (*str)[i]; i++)
+        size += is_sep(*str, i, sep, skip);
+    return size ? size + 1 : 0;
 }
 
-char **my_str_to_word_array(char *str, char sep, char skip)
+static char **init_arr(char const *str, char sep, char skip, int size)
 {
-    char **sstr = NULL;
-    int count = 1;
+    char **arr = NULL;
+    int err = 0;
+
+    arr = malloc(sizeof(char *) * (size + 1));
+    if (!arr)
+        return NULL;
+    arr[size] = NULL;
+    for (int i = 0; i < size; i++) {
+        arr[i] = malloc(my_strlen_sep(str, sep, skip) + 1);
+        if (!arr[i]) {
+            err = 1;
+            break;
+        }
+    }
+    if (err) {
+        for (int i = 0; arr[i]; i++)
+            free(arr[i]);
+        free(arr);
+        return NULL;
+    }
+    return arr;
+}
+
+char **my_str_to_word_array(char const *str, char sep, char skip)
+{
+    int size = size_words(&str, sep, skip);
+    char **arr = NULL;
     int i = 0;
     int j = 0;
 
+    if (!size)
+        return NULL;
+    arr = init_arr(str, sep, skip, size);
+    if (!arr)
+        return NULL;
     for (int index = 0; str[index]; index++)
-        if (is_sep(str[index], str[index + 1], sep, skip))
-            count++;
-    sstr = malloc(sizeof(char *) * (count + 1));
-    sstr[0] = malloc(my_strlen_sep(str, sep, skip) + 1);
-    for (int index = 0; str[index]; index++) {
-        if (str[index] != skip && str[index] != sep)
-            sstr[i][j++] = str[index];
-        else if (is_sep(str[index], str[index + 1], sep, skip)) {
-            sstr[i++][j] = 0;
+        if (VALID(str[index]))
+            arr[i][j++] = str[index];
+        else if (is_sep(str, index, sep, skip)) {
+            arr[i++][j] = 0;
             j = 0;
-            sstr[i] = malloc(my_strlen_sep(str + index + 1, sep, skip) + 1);
         }
-    }
-    return end_str(sstr, i, j);
+    arr[size - 1][j] = 0;
+    return arr;
 }

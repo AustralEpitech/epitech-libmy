@@ -56,7 +56,7 @@
 
     // my_str_to_word_array
 
-    char **my_str_to_word_array(char *str, char sep, char skip);
+    char **my_str_to_word_array(char const *str, char sep, char skip);
 
     // my_str
 

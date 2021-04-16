@@ -7,9 +7,9 @@
 
 #include <stdlib.h>
 
-int my_strlen(char const *str)
+size_t my_strlen(char const *str)
 {
-    int i = 0;
+    size_t i = 0;
 
     for (; str[i]; i++);
     return i;
@@ -17,8 +17,8 @@ int my_strlen(char const *str)
 
 char *my_strcat(char *dest, char const *src)
 {
-    int len = my_strlen(dest);
-    int i = 0;
+    size_t len = my_strlen(dest);
+    size_t i = 0;
 
     for (; src[i]; i++)
         dest[len + i] = src[i];
@@ -37,11 +37,11 @@ int my_strcmp(char const *s1, char const *s2)
 char *my_strdup(char *src)
 {
     char *res = NULL;
-    int len = my_strlen(src);
+    size_t len = my_strlen(src);
 
     res = malloc(len + 1);
     res[len] = 0;
-    for (int i = 0; src[i]; i++)
+    for (size_t i = 0; src[i]; i++)
         res[i] = src[i];
     return res;
 }
@@ -49,8 +49,8 @@ char *my_strdup(char *src)
 char *my_revstr(char *str)
 {
     char c = 0;
-    int len = my_strlen(str) - 1;
-    int stop = (len + 1) / 2;
+    size_t len = my_strlen(str) - 1;
+    size_t stop = (len + 1) / 2;
 
     for (int i = 0; i < stop; i++) {
         c = str[i];

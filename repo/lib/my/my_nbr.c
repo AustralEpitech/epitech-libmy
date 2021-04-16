@@ -12,10 +12,7 @@ int my_getnbr(char const *str)
     int nb = 0;
     int sign = 1;
 
-    if (str[0] == '-') {
-        str++;
-        sign = -1;
-    }
+    str += *str == '-' && (sign = -1);
     for (int i = 0; ISNUM(str[i]); i++)
         nb = nb * 10 + str[i] - '0';
     return nb * sign;
