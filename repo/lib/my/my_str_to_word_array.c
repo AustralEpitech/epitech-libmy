@@ -17,13 +17,13 @@ static int is_sep(char const *str, int i, char sep, char skip)
     return str[i] != sep && str[i];
 }
 
-static int my_strlen_sep(char const *str, char sep, char skip)
+static int my_strlen_sep(char const **str, char sep, char skip)
 {
     int size = 0;
 
-    for (int i = 0; str[i] && str[i] != sep; i++)
-        size += !is_sep(str, i, sep, skip);
-    return size;
+    while(**str && *(*str)++ != sep)
+        size += !is_sep(*str, 0, sep, skip);
+    return size + 1;
 }
 
 static int size_words(char const **str, char sep, char skip)
@@ -31,7 +31,7 @@ static int size_words(char const **str, char sep, char skip)
     int size = 0;
 
     while (!VALID(**str))
-        *(*str)++;
+        (*str)++;
     for (int i = 0; (*str)[i]; i++)
         size += is_sep(*str, i, sep, skip);
     return size ? size + 1 : 0;
@@ -40,20 +40,19 @@ static int size_words(char const **str, char sep, char skip)
 static char **init_arr(char const *str, char sep, char skip, int size)
 {
     char **arr = NULL;
-    int err = 0;
+    int len = 0;
 
     arr = malloc(sizeof(char *) * (size + 1));
     if (!arr)
         return NULL;
     arr[size] = NULL;
-    for (int i = 0; i < size; i++) {
-        arr[i] = malloc(my_strlen_sep(str, sep, skip) + 1);
-        if (!arr[i]) {
-            err = 1;
-            break;
-        }
+    for (int i = 0; i < size && len != -1; i++) {
+        len = my_strlen_sep(&str, sep, skip);
+        arr[i] = malloc(len + 2);
+        if (!arr[i])
+            len = -1;
     }
-    if (err) {
+    if (len == -1) {
         for (int i = 0; arr[i]; i++)
             free(arr[i]);
         free(arr);
