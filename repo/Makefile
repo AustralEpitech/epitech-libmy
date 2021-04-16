@@ -50,4 +50,4 @@ tests_run:	fclean $(OBJ) $(TOBJ) lib
 debug:		fclean
 	CFLAGS=-g3 $(MAKE) re
 
-.PHONY: clean fclean re tests_run debug
+.PHONY: all clean fclean re tests_run debug
