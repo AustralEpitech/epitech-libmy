@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run -it --rm --name epitest -v $PWD:/tmp cyberryteam/epitech-docker:latest bash
+docker run -it --rm --name epitest -v $PWD:/tmp epitechcontent/epitest-docker:latest bash
