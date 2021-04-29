@@ -18,6 +18,9 @@ get_answer () {
 SRC=$(dirname $0)/repo
 NAME=$1
 
+REMOVE="\n\033[1mREMOVE\033[0m"
+COPY="\n\033[1mCOPY\033[0m"
+
 CPFLAGS="-v"
 
 while [ -z $NAME ]; do
@@ -31,22 +34,29 @@ if [[ -d $NAME && -n $(ls -A $NAME |grep -wv ".git") ]]; then
         if [[ $ANSWER == "N" ]]; then
             CPFLAGS+="n"
         elif [[ $ANSWER == "clean" ]]; then
-            echo -e "\n\033[1mRM ALL\033[0m"
+            echo -e $REMOVE
             rm -rfv ${NAME/$(ls -A $NAME |grep -wv ".git")}
         fi
     done
 fi
 
-echo -e "\n\033[1mCOPY\033[0m"
+
 if [[ $ANSWER == "lib" ]]; then
+    echo -e $REMOVE
+    rm -frv $NAME/lib
+
+    echo -e $COPY
+    cp -frv $SRC/include/my.h $NAME/include/my.h
     cp -rv $SRC/lib/. $NAME/lib
 else
+    echo -e $COPY
     for DIR in $(find $SRC -type "d"); do
         mkdir $(echo $DIR |sed "s@${SRC}@${NAME}@g") 2> /dev/null
     done
     for FILE in $(find $SRC/ -type "f"); do
         cp $CPFLAGS $FILE $(echo $FILE |sed "s/%%PROJ%%/${NAME}/g; s@${SRC}@${NAME}@g")
     done
+
     echo -e "\n\033[1mFILE CONTENT\033[0m"
     find $NAME -path "$NAME/lib" -prune -o -type "f" ! -path "$NAME/.git/*" -exec sed -i "s/%%PROJ%%/$NAME/g; s/%%PROJ_UP%%/${NAME^^}/g" "{}" + -print
 fi
