@@ -5,9 +5,7 @@
 ** main
 */
 
-int %%PROJ%%(void);
-
-int main(void)
+int main(int ac, char **av)
 {
-    return %%PROJ%%();
+    return %%PROJ%%(av + 1);
 }

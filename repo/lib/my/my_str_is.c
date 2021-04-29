@@ -9,41 +9,35 @@
 
 int my_str_isprintable(char const *str)
 {
-    for (int i = 0; str[i]; i++)
-        if (!ISPRINT(str[i]))
-            return 0;
-    return 1;
+    while ISPRINT(*str)
+        str++;
+    return !*str || ISPRINT(*str);
 }
 
 int my_str_isnum(char const *str)
 {
-    str += *str == '-';
-    for (int i = 0; str[i]; i++)
-        if (!ISNUM(str[i]))
-            return 0;
-    return 1;
+    while ISNUM(*str)
+        str++;
+    return !*str || ISNUM(*str);
 }
 
 int my_str_isupper(char const *str)
 {
-    for (int i = 0; str[i]; i++)
-        if (!ISUP(str[i]))
-            return 0;
-    return 1;
+    while ISUP(*str)
+        str++;
+    return !*str || ISUP(*str);
 }
 
 int my_str_islower(char const *str)
 {
-    for (int i = 0; str[i]; i++)
-        if (!ISLOW(str[i]))
-            return 0;
-    return 1;
+    while ISLOW(*str)
+        str++;
+    return !*str || ISLOW(*str);
 }
 
 int my_str_isalpha(char const *str)
 {
-    for (int i = 0; str[i]; i++)
-        if (!ISALPHA(str[i]))
-            return 0;
-    return 1;
+    while ISALPHA(*str)
+        str++;
+    return !*str || ISALPHA(*str);
 }
