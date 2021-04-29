@@ -5,30 +5,30 @@
 ## Makefile
 ##
 
-CFLAGS	=	-I../../include
+CPPFLAGS	=	-I../../include
 
-SRC		=	my_compute.c			\
-			my_nbr.c				\
-			my_put.c				\
-			my_str_is.c				\
-			my_str_to_word_array.c	\
-			my_str.c				\
-			my_strcase.c			\
-			my_strstr.c
+SRC			=	my_compute.c			\
+				my_nbr.c				\
+				my_put.c				\
+				my_str_is.c				\
+				my_str_to_word_array.c	\
+				my_str.c				\
+				my_strcase.c			\
+				my_strstr.c
 
-OBJ		=	$(SRC:.c=.o)
+OBJ			=	$(SRC:.c=.o)
 
-NAME	=	../libmy.a
+NAME		=	../libmy.a
 
-all:		$(NAME)
+all:			$(NAME)
 
-$(NAME):	$(OBJ)
+$(NAME):		$(OBJ)
 	ar rc $(NAME) $(OBJ)
 
 clean:
 	rm -f $(OBJ)
 
-fclean:		clean
+fclean:			clean
 	rm -f $(NAME)
 
-re:			fclean all
+re:				fclean all

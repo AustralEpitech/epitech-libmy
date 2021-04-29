@@ -5,48 +5,50 @@
 ## Makefile
 ##
 
-LPATH	=	lib/my
+LPATH		=	lib/my
 
-CFLAGS	+=	-Iinclude -L$(LPATH)/.. -lmy -W -Wall
+CPPFLAGS	=	-Iinclude -L$(LPATH)/.. -lmy
 
-MAIN	=	src/main.o
+CFLAGS		+=	-W -Wall
 
-SRC		=	src/%%PROJ%%.c
+MAIN		=	src/main.o
 
-OBJ		=	$(SRC:.c=.o)
+SRC			=	src/%%PROJ%%.c
 
-NAME	=	%%PROJ%%
+OBJ			=	$(SRC:.c=.o)
 
-TFLAGS	=	$(CFLAGS) -lcriterion --coverage
+NAME		=	%%PROJ%%
 
-TESTS	=	tests/test_%%PROJ%%.c
+TFLAGS		=	$(CFLAGS) -lcriterion --coverage
 
-TOBJ	=	$(TESTS:.c=.o)
+TESTS		=	tests/test_%%PROJ%%.c
 
-TNAME	=	tests/unit_test
+TOBJ		=	$(TESTS:.c=.o)
 
-all:		$(NAME)
+TNAME		=	tests/unit_test
 
-$(NAME):	$(MAIN) $(OBJ)
+all:			$(NAME)
+
+$(NAME):		$(MAIN) $(OBJ)
 	$(MAKE) -C $(LPATH)
-	$(CC) -o $(NAME) $(MAIN) $(OBJ) $(CFLAGS)
+	$(CC) -o $(NAME) $(MAIN) $(OBJ)
 
 clean:
 	rm -f $(MAIN) $(OBJ) $(TOBJ) tests/*.gc*
 	$(MAKE) -C $(LPATH) clean
 
-fclean:		clean
+fclean:			clean
 	rm -f $(NAME) $(TNAME)
 	$(MAKE) -C $(LPATH) fclean
 
-re:			fclean all
+re:				fclean all
 
-tests_run:	fclean $(OBJ) $(TOBJ)
+tests_run:		fclean $(OBJ) $(TOBJ)
 	$(MAKE) -C $(LPATH)
 	$(CC) -o $(TNAME) $(TOBJ) $(OBJ) $(TFLAGS)
 	tests/unit_test
 
-debug:		fclean
+debug:			fclean
 	CFLAGS=-g3 $(MAKE) re
 
-.PHONY: all clean fclean re tests_run debug
+.PHONY:			all clean fclean re tests_run debug
