@@ -35,7 +35,7 @@ if [[ -d $NAME && -n $(ls -A $NAME |grep -wv ".git") ]]; then
             CPFLAGS+="n"
         elif [[ $ANSWER == "clean" ]]; then
             echo -e $REMOVE
-            rm -rfv ${NAME/$(ls -A $NAME |grep -wv ".git")}
+            rm -rfv $NAME/$(ls -A $NAME |grep -wv ".git")
         fi
     done
 fi
