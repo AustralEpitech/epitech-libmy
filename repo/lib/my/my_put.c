@@ -42,6 +42,7 @@ static int print_var(char flag, va_list ap)
         case 'd':
             return my_put_nbr(va_arg(ap, int));
     }
+    return 0;
 }
 
 int my_printf(char const *format, ...)

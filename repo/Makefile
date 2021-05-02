@@ -5,50 +5,50 @@
 ## Makefile
 ##
 
-LPATH		=	lib/my
+SHELL	=	/bin/bash
 
-CPPFLAGS	=	-Iinclude -L$(LPATH)/.. -lmy
+LIB_DIR	=	lib/my
+LDFLAGS	=	-L$(LIB_DIR)/..
+LDLIBS	=	-lmy
+CFLAGS	+=	-W -Wall -Iinclude
 
-CFLAGS		+=	-W -Wall
+SRC		=	src/%%PROJ%%.c
 
-MAIN		=	src/main.o
+MAIN	=	src/main.o
+OBJ		=	$(SRC:.c=.o)
 
-SRC			=	src/%%PROJ%%.c
+NAME	=	%%PROJ%%
 
-OBJ			=	$(SRC:.c=.o)
+TFLAGS	=	-lcriterion --coverage
 
-NAME		=	%%PROJ%%
+TESTS	=	tests/test_%%PROJ%%.c
 
-TFLAGS		=	$(CFLAGS) -lcriterion --coverage
+TOBJ	=	$(TESTS:.c=.o)
 
-TESTS		=	tests/test_%%PROJ%%.c
+TNAME	=	tests/unit_test
 
-TOBJ		=	$(TESTS:.c=.o)
+.PHONY:		all clean fclean re tests_run debug
 
-TNAME		=	tests/unit_test
+all:		$(NAME)
 
-all:			$(NAME)
-
-$(NAME):		$(MAIN) $(OBJ)
-	$(MAKE) -C $(LPATH)
-	$(CC) -o $(NAME) $(MAIN) $(OBJ)
+$(NAME):	$(MAIN) $(OBJ)
+	$(MAKE) -C $(LIB_DIR)
+	$(CC) -o $(NAME) $(LDFLAGS) $(LDLIBS) $(MAIN) $(OBJ)
 
 clean:
-	rm -f $(MAIN) $(OBJ) $(TOBJ) tests/*.gc*
-	$(MAKE) -C $(LPATH) clean
+	$(RM) $(MAIN) $(OBJ) $(TOBJ) tests/*.gc*
+	$(MAKE) -C $(LIB_DIR) clean
 
-fclean:			clean
-	rm -f $(NAME) $(TNAME)
-	$(MAKE) -C $(LPATH) fclean
+fclean:		clean
+	$(RM) $(NAME) $(TNAME)
+	$(MAKE) -C $(LIB_DIR) fclean
 
-re:				fclean all
+re:			fclean all
 
-tests_run:		fclean $(OBJ) $(TOBJ)
-	$(MAKE) -C $(LPATH)
-	$(CC) -o $(TNAME) $(TOBJ) $(OBJ) $(TFLAGS)
+tests_run:	fclean $(OBJ) $(TOBJ)
+	$(MAKE) -C $(LIB_DIR)
+	$(CC) -o $(TNAME) $(LDFLAGS) $(LDLIBS) $(TOBJ) $(OBJ) $(TFLAGS)
 	tests/unit_test
 
-debug:			fclean
-	CFLAGS=-g3 $(MAKE) re
-
-.PHONY:			all clean fclean re tests_run debug
+debug:		fclean
+	CFLAGS=-g3 $(MAKE)

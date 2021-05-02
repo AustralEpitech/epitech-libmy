@@ -52,7 +52,7 @@ char *my_revstr(char *str)
     size_t len = my_strlen(str) - 1;
     size_t stop = (len + 1) / 2;
 
-    for (int i = 0; i < stop; i++) {
+    for (size_t i = 0; i < stop; i++) {
         c = str[i];
         str[i] = str[len - i];
         str[len - i] = c;
