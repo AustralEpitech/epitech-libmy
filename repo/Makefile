@@ -33,7 +33,7 @@ all:		$(NAME)
 
 $(NAME):	$(MAIN) $(OBJ)
 	$(MAKE) -C $(LIB_DIR)
-	$(CC) -o $(NAME) $(LDFLAGS) $(LDLIBS) $(MAIN) $(OBJ)
+	$(CC) -o $(NAME) $(MAIN) $(OBJ) $(LDFLAGS) $(LDLIBS)
 
 clean:
 	$(RM) $(MAIN) $(OBJ) $(TOBJ) tests/*.gc*
@@ -47,7 +47,7 @@ re:			fclean all
 
 tests_run:	fclean $(OBJ) $(TOBJ)
 	$(MAKE) -C $(LIB_DIR)
-	$(CC) -o $(TNAME) $(LDFLAGS) $(LDLIBS) $(TOBJ) $(OBJ) $(TFLAGS)
+	$(CC) -o $(TNAME) $(TOBJ) $(OBJ) $(LDFLAGS) $(LDLIBS) $(TFLAGS)
 	tests/unit_test
 
 debug:		fclean
