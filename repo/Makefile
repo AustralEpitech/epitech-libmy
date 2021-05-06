@@ -11,19 +11,17 @@ LIB_DIR	=	lib/my
 LDFLAGS	=	-L$(LIB_DIR)/..
 LDLIBS	=	-lmy
 CFLAGS	+=	-W -Wall -Iinclude
+TFLAGS	=	-lcriterion --coverage
 
 SRC		=	src/%%PROJ%%.c
 
-MAIN	=	src/main.o
-OBJ		=	$(SRC:.c=.o)
-
-NAME	=	%%PROJ%%
-
-TFLAGS	=	-lcriterion --coverage
-
 TESTS	=	tests/test_%%PROJ%%.c
 
+MAIN	=	src/main.o
+OBJ		=	$(SRC:.c=.o)
 TOBJ	=	$(TESTS:.c=.o)
+
+NAME	=	%%PROJ%%
 
 TNAME	=	tests/unit_test
 
