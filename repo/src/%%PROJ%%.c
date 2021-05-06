@@ -7,7 +7,7 @@
 
 #include "%%PROJ%%.h"
 
-int %%PROJ%%(void)
+int %%PROJ%%(char **av)
 {
     return 0;
 }

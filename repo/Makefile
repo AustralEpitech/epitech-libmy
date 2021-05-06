@@ -49,4 +49,5 @@ tests_run:	fclean $(OBJ) $(TOBJ)
 	tests/unit_test
 
 debug:		fclean
+	CFLAGS=-g3 $(MAKE) lib
 	CFLAGS=-g3 $(MAKE)
