@@ -9,7 +9,7 @@
 
 char *my_strupcase(char *str)
 {
-    int shift = 'a' - 'A';
+    char shift = 'a' - 'A';
 
     for (int i = 0; str[i]; i++)
         str[i] -= shift * ISLOW(str[i]);
@@ -18,7 +18,7 @@ char *my_strupcase(char *str)
 
 char *my_strlowcase(char *str)
 {
-    int shift = 'A' - 'a';
+    char shift = 'A' - 'a';
 
     for (int i = 0; str[i]; i++)
         str[i] -= shift * ISUP(str[i]);

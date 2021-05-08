@@ -8,6 +8,8 @@
 #ifndef MY_H_
 #define MY_H_
 
+#include <stddef.h>
+
 ////////////
 // Macros //
 ////////////
@@ -60,7 +62,7 @@ char **my_str_to_word_array(char const *str, char sep, char skip);
 
 // my_str
 
-int my_strlen(char const *str);
+size_t my_strlen(char const *str);
 char *my_strcat(char *dest, char const *src);
 int my_strcmp(char const *s1, char const *s2);
 char *my_strdup(char const *src);

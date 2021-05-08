@@ -19,7 +19,7 @@ static int my_strlen_sep(char const **str, char sep, char skip)
 {
     int size = 0;
 
-    while ((**str == sep || **str == skip))
+    while (**str == sep || **str == skip)
         (*str)++;
     for (; **str && **str != sep; (*str)++)
         size += **str != skip;
@@ -30,7 +30,7 @@ static int count_words(char const *str, char sep, char skip)
 {
     int size = 1;
 
-    while ((*str == sep || *str == skip))
+    while (*str == sep || *str == skip)
         str++;
     for (int i = 0; str[i]; i++)
         size += is_sep(str, i, sep, skip);
@@ -39,10 +39,9 @@ static int count_words(char const *str, char sep, char skip)
 
 static char **init_arr(char const *str, char sep, char skip, int size)
 {
-    char **arr = NULL;
+    char **arr = malloc(sizeof(char *) * (size + 1));
     int len = 0;
 
-    arr = malloc(sizeof(char *) * (size + 1));
     if (!arr)
         return NULL;
     arr[size] = NULL;
