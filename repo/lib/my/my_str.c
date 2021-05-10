@@ -40,7 +40,7 @@ int my_strcmp(char const *s1, char const *s2)
 char *my_strdup(char const *src)
 {
     size_t len = my_strlen(src);
-    char *res = malloc(len + 1);
+    char *res = malloc((len + 1) * sizeof *res);
 
     if (!res)
         return NULL;

@@ -39,7 +39,7 @@ static int count_words(char const *str, char sep, char skip)
 
 static char **init_arr(char const *str, char sep, char skip, int size)
 {
-    char **arr = malloc(sizeof(char *) * (size + 1));
+    char **arr = malloc((size + 1) * sizeof *arr);
     int len = 0;
 
     if (!arr)
@@ -47,7 +47,7 @@ static char **init_arr(char const *str, char sep, char skip, int size)
     arr[size] = NULL;
     for (int i = 0; i < size && len != -1; i++) {
         len = my_strlen_sep(&str, sep, skip);
-        arr[i] = malloc(len + 1);
+        arr[i] = malloc((len + 1) * sizeof *arr[i]);
         arr[i][len] = 0;
         len = -1 * !arr[i];
     }
