@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-CFLAGS	+=	-I../../include
+CFLAGS	+=	-W -Wall -I../../include
 
 SRC		=	my_compute.c			\
 			my_nbr.c				\
