@@ -6,6 +6,7 @@
 */
 
 #include "%%PROJ%%.h"
+#include "my.h"
 
 int %%PROJ%%(char **av)
 {
