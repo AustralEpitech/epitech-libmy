@@ -6,7 +6,7 @@
 */
 
 #ifndef MY_H_
-#define MY_H_
+    #define MY_H_
 
 ////////////
 // Macros //
@@ -14,16 +14,17 @@
 
 // Char
 
-#define ISPRINT(c) (32 <= c && c <= 126)
-#define ISNUM(c) ('0' <= c && c <= '9')
-#define ISUP(c) ('A' <= c && c <= 'Z')
-#define ISLOW(c) ('a' <= c && c <= 'z')
-#define ISALPHA(c) (ISUP(c) || ISLOW(c))
+    #define ISPRINT(c)  (32 <= (c) && (c) <= 127)
+    #define ISNUM(c)    ('0' <= (c) && (c) <= '9')
+    #define ISUP(c)     ('A' <= (c) && (c) <= 'Z')
+    #define ISLOW(c)    ('a' <= (c) && (c) <= 'z')
+    #define ISALPHA(c)  (ISUP(c) || ISLOW(c))
 
-// Nb
+// Maths
 
-#define ABS(n) (n < 0 ? -n : n)
-#define ROUNDUP(n) ((int)(n + 1))
+    #define ABS(n)      ((n) < 0 ? -(n) : (n))
+    #define FLOOR(n)    ((int)(n))
+    #define CEIL(n)     ((int)((n) + 1))
 
 ///////////////
 // Functions //
@@ -46,18 +47,6 @@ int my_put_nbr(int nb);
 int my_putstr(char const *str);
 int my_printf(char const *format, ...);
 
-// my_str_is
-
-int my_str_isprintable(char const *str);
-int my_str_isnum(char const *str);
-int my_str_isupper(char const *str);
-int my_str_islower(char const *str);
-int my_str_isalpha(char const *str);
-
-// my_str_to_word_array
-
-char **my_str_to_word_array(char const *str, char sep, char skip);
-
 // my_str
 
 int my_strlen(char const *str);
@@ -71,8 +60,23 @@ char *my_revstr(char *str);
 char *my_strupcase(char *str);
 char *my_strlowcase(char *str);
 
+// my_str_is
+
+int my_str_isprintable(char const *str);
+int my_str_isnum(char const *str);
+int my_str_isupper(char const *str);
+int my_str_islower(char const *str);
+int my_str_isalpha(char const *str);
+
 // my_strstr
 
 char *my_strstr(char *str, char const *to_find);
+
+// my_strtok
+
+int my_strcspn(char const *s, char const *reject);
+int my_strspn(char const *s, char const *accept);
+char *my_strtok_r(char *s, const char *delim, char **save_ptr);
+char *my_strtok(char *str, char const *delim);
 
 #endif /* !MY_H_ */

@@ -5,9 +5,9 @@
 ** my_put
 */
 
-#include "my.h"
 #include <stdarg.h>
 #include <unistd.h>
+#include "my.h"
 
 int my_putchar(char c)
 {

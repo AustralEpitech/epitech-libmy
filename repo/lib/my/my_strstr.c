@@ -5,6 +5,7 @@
 ** my_strstr
 */
 
+#include <stddef.h>
 #include "my.h"
 
 static int check(char const *str, char const *to_find)
@@ -17,9 +18,9 @@ static int check(char const *str, char const *to_find)
 
 char *my_strstr(char *str, char const *to_find)
 {
-    int stop = my_strlen(str) - my_strlen(to_find);
-
-    for (int i = 0; i <= stop; i++)
+    if (!*str && !*to_find)
+        return str;
+    for (int i = 0; str[i]; i++)
         if (check(str + i, to_find))
             return str + i;
     return NULL;

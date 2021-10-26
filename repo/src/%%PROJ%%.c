@@ -5,10 +5,10 @@
 ** %%PROJ%%
 */
 
-#include "%%PROJ%%.h"
 #include "my.h"
+#include "%%PROJ%%.h"
 
-int %%PROJ%%(char **av)
+int %%PROJ%%(void)
 {
     return 0;
 }

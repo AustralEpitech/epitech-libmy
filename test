@@ -1,0 +1,50 @@
+#!/bin/bash
+
+SRC="$(dirname "$0")/repo"
+NAME="$1"
+
+REMOVE="\n\033[1mREMOVE\033[0m"
+COPY="\n\033[1mCOPY\033[0m"
+
+CP='cp -v'
+RM='rm -fv'
+ECHO='echo -e'
+
+while [ -z "$NAME" ] && ! read -rp "Name: " NAME; do
+    echo
+done
+
+if [[ -d $NAME && -n "$(ls -A "$NAME" |grep -wv ".git")" ]]; then
+    $ECHO "$NAME exists. Replace files?"
+    select CHOICE in yes no lib clean; do
+        case "$CHOICE" in
+            no)
+                CPFLAGS+='n'
+                ;;
+            lib)
+                $ECHO "$REMOVE"
+                $RM -r "$NAME/lib"
+                $ECHO "$COPY"
+                $CP -fr "$SRC/include/my.h" "$NAME/include/my.h"
+                $CP -fr "$SRC/lib" "$NAME/lib"
+                ;;
+            clean)
+                $ECHO "$REMOVE"
+                $RM "$NAME/{*,$($ECHO .* |grep -wv ".git")}"
+                ;;
+        esac
+    done
+fi
+
+$ECHO "$COPY"
+for DIR in $(find $SRC -type d); do
+    mkdir "$(echo $DIR |sed "s@${SRC}@${NAME}@g")" 2> /dev/null
+done
+for FILE in "$(find $SRC -type f)"; do
+    $CP "$FILE" "$($ECHO "$FILE" | sed "s/test/${NAME}/g; s@${SRC}@${NAME}@g")"
+done
+
+$ECHO "\n\033[1mFILE CONTENT\033[0m"
+find "$NAME" -path "$NAME/lib" -prune -o -type "f" ! -path "$NAME/.git/*" -exec sed -i "s/test/$NAME/g; s/TEST/${NAME^^}/g" "{}" + -print
+
+$ECHO "\n\033[1mDONE\033[0m"

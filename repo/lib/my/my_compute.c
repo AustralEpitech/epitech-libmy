@@ -9,7 +9,7 @@ int my_compute_power_rec(int nb, int power)
 {
     if (nb == 1 || !power)
         return 1;
-    if (power < 0 || !nb)
+    if (power < 0)
         return 0;
     nb *= my_compute_power_rec(nb, power - 1);
     return nb;
@@ -17,10 +17,10 @@ int my_compute_power_rec(int nb, int power)
 
 int my_compute_square_root(int nb)
 {
-    int stop = nb / 2;
+    int pow = 0;
+    int i = 1;
 
-    for (int i = 0; i <= stop; i++)
-        if (i * i == nb)
-            return i;
-    return -1;
+    for (; pow < nb; i++)
+        pow = i * i;
+    return pow == nb ? --i : 0;
 }

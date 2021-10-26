@@ -6,8 +6,8 @@
 */
 
 #ifndef MAIN_H_
-#define MAIN_H_
+    #define MAIN_H_
 
-int %%PROJ%%(char **av);
+int %%PROJ%%(void);
 
 #endif /* !MAIN_H_ */

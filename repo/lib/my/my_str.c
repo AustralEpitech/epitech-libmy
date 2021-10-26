@@ -17,19 +17,16 @@ int my_strlen(char const *str)
 
 char *my_strcat(char *dest, char const *src)
 {
-    int len = my_strlen(dest);
-    int i = 0;
+    int i = my_strlen(dest);
 
-    for (; src[i]; i++)
-        dest[len + i] = src[i];
-    dest[len + i] = 0;
+    for (int j = 0; src[j]; j++)
+        dest[i++] = src[j];
+    dest[i] = 0;
     return dest;
 }
 
 int my_strcmp(char const *s1, char const *s2)
 {
-    if (!(s1 && s2))
-        return -1;
     while (!(*s1 - *s2) && *s1) {
         s1++;
         s2++;

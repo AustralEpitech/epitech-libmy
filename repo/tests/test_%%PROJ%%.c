@@ -5,18 +5,9 @@
 ** test_%%PROJ%%
 */
 
-#include <criterion/criterion.h>
-#include <criterion/redirect.h>
+#include "tests.h"
 
-int %%PROJ%%(void);
-
-void redirect_all_stdout(void)
+Test(test_%%PROJ%%, %%PROJ%%_1, .init=cr_redirect_stdout)
 {
-    cr_redirect_stdout();
-    cr_redirect_stderr();
-}
-
-Test(test_%%PROJ%%, %%PROJ%%_1)
-{
-    return;
+    %%PROJ%%();
 }

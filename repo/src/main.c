@@ -7,7 +7,7 @@
 
 #include "main.h"
 
-int main(int ac, char **av)
+int main(int ac, char *av[])
 {
-    return %%PROJ%%(av + 1);
+    return %%PROJ%%();
 }
