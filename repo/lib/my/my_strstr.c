@@ -18,7 +18,7 @@ static int check(char const *str, char const *to_find)
 
 char *my_strstr(char *str, char const *to_find)
 {
-    if (!*str && !*to_find)
+    if (!(*str) && !(*to_find))
         return str;
     for (int i = 0; str[i]; i++)
         if (check(str + i, to_find))

@@ -1,3 +1,6 @@
 *.o
 *.a
+*.gc*
+vgcore.*
+unit_test
 %%PROJ%%

@@ -8,17 +8,17 @@
 SHELL	=	/bin/bash
 
 LIB_DIR	=	lib
-LDFLAGS	=	-L$(LIB_DIR)
-LDLIBS	=	-lmy
+LDFLAGS	=	-L$(LIB_DIR) -lmy
 CFLAGS	+=	-Wpedantic -Wall -Wextra -Iinclude
-TFLAGS	=	-lm -lcriterion --coverage
+
+TFLAGS	=	--coverage
+TLIBS	=	-lm -lcriterion
 
 MAKELIB	=	$(MAKE) -C $(LIB_DIR)/my
 
 SRC		=	src/%%PROJ%%.c
 
 TESTS	=	tests/test_%%PROJ%%.c
-
 TESTS	+=	tests/lib/test_my_compute_power_rec.c	\
 			tests/lib/test_my_compute_square_root.c	\
 			tests/lib/test_my_getnbr.c				\
@@ -43,22 +43,24 @@ MAIN	=	src/main.o
 OBJ		=	$(SRC:.c=.o)
 TOBJ	=	$(TESTS:.c=.o)
 
+LIB		=	$(LIBDIR)/libmy.a
 NAME	=	%%PROJ%%
 
-TNAME	=	tests/unit_test
+TNAME	=	unit_test
 
-.PHONY:		all lib clean fclean re tests_run
+.PHONY:		all clean fclean re tests_run
 
-all:		$(NAME)
+all:		$(LIB) $(NAME)
 
-lib:
+$(LIB):
 	$(MAKELIB)
 
-$(NAME):	lib $(MAIN) $(OBJ)
-	$(CC) -o $(NAME) $(MAIN) $(OBJ) $(LDFLAGS) $(LDLIBS)
+$(NAME):	$(MAIN) $(OBJ)
+	$(CC) -o $(NAME) $(MAIN) $(OBJ) $(LDFLAGS)
 
 clean:
-	$(RM) $(MAIN) $(OBJ) $(TOBJ) tests/*.gc*
+	$(RM) $(MAIN) $(OBJ) $(TOBJ)
+	find -name '*.gc*' -delete
 	$(MAKELIB) clean
 
 fclean:		clean
@@ -67,6 +69,7 @@ fclean:		clean
 
 re:			fclean all
 
-tests_run:	fclean lib $(OBJ) $(TOBJ)
-	$(CC) -o $(TNAME) $(TOBJ) $(OBJ) $(LDFLAGS) $(LDLIBS) $(TFLAGS)
-	tests/unit_test
+tests_run:	fclean $(LIB) $(SRC) $(TESTS)
+	CFLAGS="$(TFLAGS)" $(MAKE) $(OBJ) $(TOBJ)
+	$(CC) -o $(TNAME) $(OBJ) $(TOBJ) $(LDFLAGS) $(TLIBS) $(TFLAGS)
+	./$(TNAME)

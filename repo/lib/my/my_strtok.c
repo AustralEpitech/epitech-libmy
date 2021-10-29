@@ -58,5 +58,6 @@ char *my_strtok_r(char *s, const char *delim, char **save_ptr)
 char *my_strtok(char *s, const char *delim)
 {
     static char *olds;
+
     return my_strtok_r(s, delim, &olds);
 }
