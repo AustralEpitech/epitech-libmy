@@ -8,17 +8,25 @@
 #ifndef MY_H_
     #define MY_H_
 
+    #include <stdarg.h>
+    #include <stddef.h>
+
 ////////////
 // Macros //
 ////////////
 
 // Char
 
-    #define ISPRINT(c)  (32 <= (c) && (c) <= 127)
-    #define ISNUM(c)    ('0' <= (c) && (c) <= '9')
-    #define ISUP(c)     ('A' <= (c) && (c) <= 'Z')
-    #define ISLOW(c)    ('a' <= (c) && (c) <= 'z')
-    #define ISALPHA(c)  (ISUP(c) || ISLOW(c))
+    #define ISUPPER(c)  ('A' <= (c) && (c) <= 'Z')
+    #define ISLOWER(c)  ('a' <= (c) && (c) <= 'z')
+    #define ISALPHA(c)  (ISUPPER(c) || ISLOWER(c))
+    #define ISDIGIT(c)  ('0' <= (c) && (c) <= '9')
+    #define ISPRINT(c)  (032 <= (c) && (c) <= 127)
+    #define ISALNUM(c)  (ISALPHA(c) || ISDIGIT(c))
+
+    #define TOUPPER(c)  (ISLOWER(c) ? (c) - 'a' + 'A' : (c))
+    #define TOLOWER(c)  (ISUPPER(c) ? (c) - 'A' + 'a' : (c))
+    #define TODIGIT(c)  (ISDIGIT(c) ? (c) - '0' : (c))
 
 // Maths
 
@@ -30,53 +38,45 @@
 // Functions //
 ///////////////
 
-// my_compute
+// math
+int     my_pow(int n, int p);
+int     my_sqrt(int n);
 
-int my_compute_power_rec(int nb, int power);
-int my_compute_square_root(int nb);
+// stdio
+int     my_fprintf(int fildes, char const *format, ...);
+int     my_fputc(int fildes, int c);
+int     my_fputnbr(int fildes, int nb);
+int     my_fputnbr_base(int fildes, int nb, char *base);
+int     my_fputs(int fildes, char const *s);
+int     my_printf(char const *format, ...);
+int     my_putchar(int c);
+int     my_putnbr(int nb);
+int     my_putnbr_base(int nb, char *base);
+int     my_puts(char const *s);
+int     my_vfprintf(int fildes, char const *format, va_list ap);
 
-// my_nbr
+// stdlib
+int     my_atoi(char const *nptr);
 
-int my_getnbr(char const *str);
-int my_is_prime(int nb);
-
-// my_put
-
-int my_putchar(char c);
-int my_put_nbr(int nb);
-int my_putstr(char const *str);
-int my_printf(char const *format, ...);
-
-// my_str
-
-int my_strlen(char const *str);
-char *my_strcat(char *dest, char const *src);
-int my_strcmp(char const *s1, char const *s2);
-char *my_strdup(char const *src);
-char *my_revstr(char *str);
-
-// my_strcase
-
-char *my_strupcase(char *str);
-char *my_strlowcase(char *str);
-
-// my_str_is
-
-int my_str_isprintable(char const *str);
-int my_str_isnum(char const *str);
-int my_str_isupper(char const *str);
-int my_str_islower(char const *str);
-int my_str_isalpha(char const *str);
-
-// my_strstr
-
-char *my_strstr(char *str, char const *to_find);
-
-// my_strtok
-
-int my_strcspn(char const *s, char const *reject);
-int my_strspn(char const *s, char const *accept);
-char *my_strtok_r(char *s, const char *delim, char **save_ptr);
-char *my_strtok(char *str, char const *delim);
+// string
+void    *my_memcpy(void *dest, void const *src, size_t n);
+void    *my_memset(void *s, int c, size_t n);
+char    *my_revstr(char *str);
+char    *my_strcat(char *dest, char const *src);
+char    *my_strchr(char const *s, int c);
+int     my_strcmp(char const *s1, char const *s2);
+char    *my_strcpy(char *dest, char const *src);
+size_t  my_strcspn(char const *s, char const *reject);
+char    *my_strdup(char const *s);
+size_t  my_strlen(char const *s);
+char    *strncat(char *dest, char const *src, size_t n);
+int     my_strncmp(char const *s1, char const *s2, size_t n);
+char    *my_strncpy(char *dest, char const *src, size_t n);
+char    *my_strndup(char const *s, size_t n);
+size_t  my_strnlen(char const *s, size_t maxlen);
+size_t  my_strspn(char const *s, char const *accept);
+char    *my_strstr(char const *haystack, char const *needle);
+char    *my_strtok(char *str, const char *delim);
+char    *my_strtok_r(char *s, const char *delim, char **save_ptr);
 
 #endif /* !MY_H_ */

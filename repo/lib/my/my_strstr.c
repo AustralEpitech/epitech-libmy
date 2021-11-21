@@ -5,23 +5,14 @@
 ** my_strstr
 */
 
-#include <stddef.h>
 #include "my.h"
 
-static int check(char const *str, char const *to_find)
+char *my_strstr(char const *haystack, char const *needle)
 {
-    for (int i = 0; to_find[i]; i++)
-        if (str[i] != to_find[i])
-            return 0;
-    return 1;
-}
-
-char *my_strstr(char *str, char const *to_find)
-{
-    if (!(*str) && !(*to_find))
-        return str;
-    for (int i = 0; str[i]; i++)
-        if (check(str + i, to_find))
-            return str + i;
+    if (!(*haystack) && !(*needle))
+        return (char *)haystack;
+    for (; *haystack; haystack++)
+        if (!my_strcmp(haystack, needle))
+            return (char *)haystack;
     return NULL;
 }
