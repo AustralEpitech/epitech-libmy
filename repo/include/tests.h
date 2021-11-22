@@ -10,6 +10,7 @@
 
     #include <criterion/criterion.h>
     #include <criterion/redirect.h>
+    #include "my.h"
 
 int %%PROJ%%(void);
 

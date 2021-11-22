@@ -6,8 +6,7 @@
 */
 
 #include <string.h>
-#include <criterion/criterion.h>
-#include "my.h"
+#include "tests.h"
 
 Test(strlen, hello_world)
 {

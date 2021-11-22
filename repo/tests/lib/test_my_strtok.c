@@ -6,8 +6,7 @@
 */
 
 #include <string.h>
-#include <criterion/criterion.h>
-#include "my.h"
+#include "tests.h"
 
 Test(strtok, hello_world_space_o)
 {

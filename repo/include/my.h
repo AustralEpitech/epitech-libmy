@@ -69,7 +69,7 @@ char    *my_strcpy(char *dest, char const *src);
 size_t  my_strcspn(char const *s, char const *reject);
 char    *my_strdup(char const *s);
 size_t  my_strlen(char const *s);
-char    *strncat(char *dest, char const *src, size_t n);
+char    *my_strncat(char *dest, char const *src, size_t n);
 int     my_strncmp(char const *s1, char const *s2, size_t n);
 char    *my_strncpy(char *dest, char const *src, size_t n);
 char    *my_strndup(char const *s, size_t n);

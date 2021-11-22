@@ -12,11 +12,9 @@ int my_atoi(char const *nptr)
     int n = 0;
     short sign = 1;
 
-    sign = *nptr == '-';
+    sign = *nptr == '-' ? -1 : 1;
     nptr += *nptr == '-' || *nptr == '+';
-    if (ISDIGIT(*nptr))
-        n = sign * TODIGIT(*nptr++);
     for (; ISDIGIT(*nptr); nptr++)
-        n = n * 10 + TODIGIT(*nptr);
+        n = n * 10 + sign * TODIGIT(*nptr);
     return n;
 }

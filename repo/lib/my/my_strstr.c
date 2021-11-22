@@ -9,10 +9,12 @@
 
 char *my_strstr(char const *haystack, char const *needle)
 {
-    if (!(*haystack) && !(*needle))
+    size_t len = my_strlen(needle);
+
+    if (!len)
         return (char *)haystack;
     for (; *haystack; haystack++)
-        if (!my_strcmp(haystack, needle))
+        if (!my_strncmp(haystack, needle, len))
             return (char *)haystack;
     return NULL;
 }

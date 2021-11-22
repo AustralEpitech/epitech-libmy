@@ -7,13 +7,11 @@
 
 #include "my.h"
 
-char *strncat(char *dest, char const *src, size_t n)
+char *my_strncat(char *dest, char const *src, size_t n)
 {
-    char *saveptr = dest;
+    size_t len = my_strlen(dest);
 
-    dest += my_strlen(dest);
-    for (; *src && n; n--)
-        *dest = *src++;
-    *dest = '\0';
-    return saveptr;
+    my_memcpy(dest + len, src, n);
+    dest[len + n] = '\0';
+    return dest;
 }

@@ -13,6 +13,7 @@ static int print_flag(int fildes, char flag, va_list ap)
 {
     switch (flag) {
         case 'd':
+        case 'i':
             return my_fputnbr(fildes, va_arg(ap, int));
         case 'b':
             return my_fputnbr_base(fildes, va_arg(ap, int), "01");
@@ -25,7 +26,7 @@ static int print_flag(int fildes, char flag, va_list ap)
         case 's':
             return my_fputs(fildes, va_arg(ap, char *));
         case '%':
-            return my_fputs(fildes, "%%");
+            return my_fputc(fildes, flag);
     }
     return my_fputs(fildes, (char []){'%', flag, '\0'});
 }
@@ -35,12 +36,12 @@ int my_vfprintf(int fildes, char const *format, va_list ap)
     int len = 0;
 
     for (int size = 0; *format; format++) {
-        for (size = 0; *(format + size) != '%' && *(format + size); size++);
-        if (size) {
+        size = my_strcspn(format, "%");
+        if (size)
             format += write(fildes, format, size) - 1;
-            len += size;
-        } else if (*format == '%')
-            len += print_flag(fildes, *++format, ap);
+        else if (*format == '%')
+            size = print_flag(fildes, *(++format), ap);
+        len += size;
     }
     return len;
 }

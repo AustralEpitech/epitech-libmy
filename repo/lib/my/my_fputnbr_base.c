@@ -16,8 +16,10 @@ int my_fputnbr_base(int fildes, int nb, char *base)
     int base_size = my_strlen(base);
     short neg = nb < 0;
 
+    if (!nb)
+        return write(fildes, base, 1);
     for (; nb; nb /= base_size)
-        str[size - ++len] = ABS(nb % base_size) + '0';
+        str[size - ++len] = base[ABS(nb % base_size)];
     if (neg)
         str[size - ++len] = '-';
     return write(fildes, str + size - len, len);

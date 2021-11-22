@@ -11,7 +11,7 @@
 char *my_strdup(char const *s)
 {
     size_t len = my_strlen(s) + 1;
-    char *new = malloc(len * sizeof *new);
+    char *new = malloc(len);
 
     if (!new)
         return NULL;

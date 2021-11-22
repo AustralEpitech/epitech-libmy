@@ -9,5 +9,5 @@ char *my_strchr(char const *s, int c)
 {
     while (*s != c && *s)
         s++;
-    return (char *)s;
+    return *s == c ? (char *)s : (char *)0;
 }

@@ -5,8 +5,7 @@
 ** test_my_revstr
 */
 
-#include <criterion/criterion.h>
-#include "my.h"
+#include "tests.h"
 
 Test(my_revstr, hello)
 {

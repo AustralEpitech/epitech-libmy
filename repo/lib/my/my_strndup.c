@@ -10,9 +10,11 @@
 
 char *my_strndup(char const *s, size_t n)
 {
-    char *new = malloc(n * sizeof *new);
+    size_t len = my_strnlen(s, n);
+    char *new = malloc(len + 1);
 
     if (!new)
         return NULL;
-    return my_memcpy(new, s, n);
+    new[len] = '\0';
+    return my_memcpy(new, s, len);
 }

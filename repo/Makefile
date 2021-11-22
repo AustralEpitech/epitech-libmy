@@ -19,25 +19,28 @@ MAKELIB	=	$(MAKE) -C $(LIB_DIR)/my
 SRC		=	src/%%PROJ%%.c
 
 TESTS	=	tests/test_%%PROJ%%.c
-TESTS	+=	tests/lib/test_my_compute_power_rec.c	\
-			tests/lib/test_my_compute_square_root.c	\
-			tests/lib/test_my_getnbr.c				\
-			tests/lib/test_my_is_prime.c			\
-			tests/lib/test_my_printf.c				\
-			tests/lib/test_my_revstr.c				\
-			tests/lib/test_my_strcat.c				\
-			tests/lib/test_my_strcmp.c				\
-			tests/lib/test_my_strdup.c				\
-			tests/lib/test_my_str_isalpha.c			\
-			tests/lib/test_my_str_islower.c			\
-			tests/lib/test_my_str_isnum.c			\
-			tests/lib/test_my_str_isprintable.c		\
-			tests/lib/test_my_str_isupper.c			\
-			tests/lib/test_my_strlen.c				\
-			tests/lib/test_my_strlowcase.c			\
-			tests/lib/test_my_strstr.c				\
-			tests/lib/test_my_strtok.c				\
-			tests/lib/test_my_strupcase.c
+TESTS	+=	tests/lib/test_my_atoi.c	\
+			tests/lib/test_my_memcpy.c	\
+			tests/lib/test_my_memset.c	\
+			tests/lib/test_my_pow.c		\
+			tests/lib/test_my_printf.c	\
+			tests/lib/test_my_revstr.c	\
+			tests/lib/test_my_sqrt.c	\
+			tests/lib/test_my_strcat.c	\
+			tests/lib/test_my_strchr.c	\
+			tests/lib/test_my_strcmp.c	\
+			tests/lib/test_my_strcpy.c	\
+			tests/lib/test_my_strcspn.c	\
+			tests/lib/test_my_strdup.c	\
+			tests/lib/test_my_strlen.c	\
+			tests/lib/test_my_strncat.c	\
+			tests/lib/test_my_strncmp.c	\
+			tests/lib/test_my_strncpy.c	\
+			tests/lib/test_my_strndup.c	\
+			tests/lib/test_my_strnlen.c	\
+			tests/lib/test_my_strspn.c	\
+			tests/lib/test_my_strstr.c	\
+			tests/lib/test_my_strtok.c
 
 MAIN	=	src/main.o
 OBJ		=	$(SRC:.c=.o)

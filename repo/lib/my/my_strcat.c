@@ -9,11 +9,6 @@
 
 char *my_strcat(char *dest, char const *src)
 {
-    char *saveptr = dest;
-
-    dest += my_strlen(dest);
-    for (; *src; src++)
-        *dest = *src;
-    *dest = '\0';
-    return saveptr;
+    my_strcpy(dest + my_strlen(dest), src);
+    return dest;
 }
