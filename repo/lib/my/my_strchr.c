@@ -5,7 +5,7 @@
 ** my_strchr
 */
 
-char *my_strchr(char const *s, int c)
+char *my_strchr(const char *s, int c)
 {
     while (*s != c && *s)
         s++;

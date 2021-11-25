@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include "my.h"
 
-int my_printf(char const *format, ...)
+int my_printf(const char *format, ...)
 {
     va_list ap;
     int len;

@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "my.h"
 
-char *my_strdup(char const *s)
+char *my_strdup(const char *s)
 {
     size_t len = my_strlen(s) + 1;
     char *new = malloc(len);

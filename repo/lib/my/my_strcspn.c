@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-size_t my_strcspn(char const *s, char const *reject)
+size_t my_strcspn(const char *s, const char *reject)
 {
     size_t i = 0;
 

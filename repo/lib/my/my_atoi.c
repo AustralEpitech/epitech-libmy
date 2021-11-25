@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-int my_atoi(char const *nptr)
+int my_atoi(const char *nptr)
 {
     int n = 0;
     short sign = 1;

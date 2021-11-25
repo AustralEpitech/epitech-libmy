@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include "my.h"
 
-int my_puts(char const *s)
+int my_puts(const char *s)
 {
     return my_fputs(STDOUT_FILENO, s);
 }

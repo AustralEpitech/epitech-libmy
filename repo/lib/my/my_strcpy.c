@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-char *my_strcpy(char *dest, char const *src)
+char *my_strcpy(char *dest, const char *src)
 {
     return my_memcpy(dest, src, my_strlen(src) + 1);
 }

@@ -7,7 +7,7 @@
 
 #include <stddef.h>
 
-void *my_memcpy(void *dest, void const *src, size_t n)
+void *my_memcpy(void *dest, const void *src, size_t n)
 {
     char *csrc = (char *)src;
     char *cdest = (char *)dest;

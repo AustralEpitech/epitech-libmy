@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-char *my_strstr(char const *haystack, char const *needle)
+char *my_strstr(const char *haystack, const char *needle)
 {
     size_t len = my_strlen(needle);
 

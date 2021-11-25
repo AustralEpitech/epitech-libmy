@@ -31,7 +31,7 @@ static int print_flag(int fildes, char flag, va_list ap)
     return my_fputs(fildes, (char []){'%', flag, '\0'});
 }
 
-int my_vfprintf(int fildes, char const *format, va_list ap)
+int my_vfprintf(int fildes, const char *format, va_list ap)
 {
     int len = 0;
 
