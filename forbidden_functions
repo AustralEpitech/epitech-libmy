@@ -1,0 +1,17 @@
+my_error:
+    my_error:
+        strerror
+        exit
+
+my_string:
+    my_str_to_word_array:
+    my_strdup:
+    my_strndup:
+        malloc
+
+my_stdio:
+    my_fputc:
+    my_fputnbr_base:
+    my_fputs:
+    my_vfprintf:
+        write

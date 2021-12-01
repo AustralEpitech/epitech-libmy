@@ -1,64 +1,47 @@
-#!/bin/bash
+#!/usr/bin/bash
 
-get_answer () {
-    case ${1^^} in
-        "" | N | NO)
-            ANSWER="N";;
-        Y | YES)
-            ANSWER="Y";;
-        LIB)
-            ANSWER="lib";;
-        CLEAN)
-            ANSWER="clean";;
-        *)
-            ANSWER="";;
-    esac
-}
+set -e
+shopt -s extglob dotglob
 
-SRC=$(dirname $0)/repo
-NAME=$1
+BOLD="\033[1m"
+NORM="\033[0m"
 
-REMOVE="\n\033[1mREMOVE\033[0m"
-COPY="\n\033[1mCOPY\033[0m"
+REMOVE="${BOLD}REMOVE${NORM}"
+COPY="${BOLD}COPY${NORM}"
+REPLACING="${BOLD}REPLACING PROJECT NAME${NORM}"
+DONE="${BOLD}DONE${NORM}"
 
-CPFLAGS="-v"
+CP="cp -fr"
+ECHO="echo -e"
+MKDIR="mkdir -p"
+RM="rm -fr"
 
-while [ -z $NAME ]; do
-    if ! read -p "Name: " NAME; then echo; fi
+SRC="$(dirname "$0")/repo"
+NAME="$1"
+
+while [ -z "$NAME" ]; do
+    read -rp "Name: " NAME
 done
 
-if [[ -d $NAME && -n $(ls -A $NAME |grep -wv ".git") ]]; then
-    while [ -z $ANSWER ]; do
-        read -p "$NAME exists. Replace files? [N/y/lib/clean] " ANSWER
-        get_answer $ANSWER
-        if [[ $ANSWER == "N" ]]; then
-            CPFLAGS+="n"
-        elif [[ $ANSWER == "clean" ]]; then
-            echo -e $REMOVE
-            rm -rfv $NAME/$(ls -A $NAME |grep -wv ".git")
-        fi
-    done
+if [ -d "$NAME" ]; then
+    read -rp "$NAME exists. Purge content? [Y/n] " ANS
+    case "${ANS,,}" in
+        "" | y | yes)
+            $ECHO "$REMOVE"
+            find "$NAME" -name '.git' -prune -o -print0 | xargs $RM
+            ;;
+        *)
+            exit 1
+            ;;
+    esac
 fi
 
+echo -e "$COPY"
+$MKDIR "$NAME"
+$CP "$SRC"/* "$NAME"
+rename "%%PROJ%%" "$NAME" "$NAME"/**/*
 
-if [[ $ANSWER == "lib" ]]; then
-    echo -e $REMOVE
-    rm -frv $NAME/lib
+$ECHO "$REPLACING"
+find "$NAME" -type "f" ! -path "$NAME/.git/*" -exec sed -i "s/%%PROJ%%/$NAME/g; s/%%PROJ_UP%%/${NAME^^}/g" {} +
 
-    echo -e $COPY
-    cp -frv $SRC/include/my.h $NAME/include/my.h
-    cp -rv $SRC/lib/. $NAME/lib
-else
-    echo -e $COPY
-    for DIR in $(find $SRC -type "d"); do
-        mkdir $(echo $DIR |sed "s@${SRC}@${NAME}@g") 2> /dev/null
-    done
-    for FILE in $(find $SRC/ -type "f"); do
-        cp $CPFLAGS $FILE $(echo $FILE |sed "s/%%PROJ%%/${NAME}/g; s@${SRC}@${NAME}@g")
-    done
-
-    echo -e "\n\033[1mFILE CONTENT\033[0m"
-    find $NAME -path "$NAME/lib" -prune -o -type "f" ! -path "$NAME/.git/*" -exec sed -i "s/%%PROJ%%/$NAME/g; s/%%PROJ_UP%%/${NAME^^}/g" "{}" + -print
-fi
-
-echo -e "\n\033[1mDONE\033[0m"
+$ECHO "$DONE"

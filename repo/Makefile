@@ -7,72 +7,47 @@
 
 SHELL	=	/bin/bash
 
-LIB_DIR	=	lib
-LDFLAGS	=	-L$(LIB_DIR) -lmy
+LIBS	=	my_{error,math,stdio,stdlib,string,strings}
+LDFLAGS	=	-Llib -l$(LIBS)
+
 CFLAGS	+=	-Wpedantic -Wall -Wextra -Iinclude
 
 TFLAGS	=	--coverage
-TLIBS	=	-lm -lcriterion
+TLIBS	=	-lcriterion
 
-MAKELIB	=	$(MAKE) -C $(LIB_DIR)/my
-
+MAIN	=	src/main.c
 SRC		=	src/%%PROJ%%.c
 
 TESTS	=	tests/test_%%PROJ%%.c
-TESTS	+=	tests/lib/test_my_atoi.c	\
-			tests/lib/test_my_memcpy.c	\
-			tests/lib/test_my_memset.c	\
-			tests/lib/test_my_pow.c		\
-			tests/lib/test_my_printf.c	\
-			tests/lib/test_my_revstr.c	\
-			tests/lib/test_my_sqrt.c	\
-			tests/lib/test_my_strcat.c	\
-			tests/lib/test_my_strchr.c	\
-			tests/lib/test_my_strcmp.c	\
-			tests/lib/test_my_strcpy.c	\
-			tests/lib/test_my_strcspn.c	\
-			tests/lib/test_my_strdup.c	\
-			tests/lib/test_my_strlen.c	\
-			tests/lib/test_my_strncat.c	\
-			tests/lib/test_my_strncmp.c	\
-			tests/lib/test_my_strncpy.c	\
-			tests/lib/test_my_strndup.c	\
-			tests/lib/test_my_strnlen.c	\
-			tests/lib/test_my_strspn.c	\
-			tests/lib/test_my_strstr.c	\
-			tests/lib/test_my_strtok.c
 
-MAIN	=	src/main.o
-OBJ		=	$(SRC:.c=.o)
-TOBJ	=	$(TESTS:.c=.o)
+OBJ		=	$(MAIN:.c=.o) $(SRC:.c=.o)
+TOBJ	=	$(SRC:.c=.o) $(TESTS:.c=.o)
 
-LIB		=	$(LIBDIR)/libmy.a
 NAME	=	%%PROJ%%
 
 TNAME	=	unit_test
 
-.PHONY:		all clean fclean re tests_run
+.PHONY:		all lib clean fclean re tests_run
 
-all:		$(LIB) $(NAME)
+all:		lib $(NAME)
 
-$(LIB):
-	$(MAKELIB)
+lib:
+	@for i in $(LIBS); do $(MAKE) -C lib/$$i; done
 
-$(NAME):	$(MAIN) $(OBJ)
-	$(CC) -o $(NAME) $(MAIN) $(OBJ) $(LDFLAGS)
+$(NAME):	$(OBJ)
+	$(CC) -o $@ $(OBJ) $(LDFLAGS)
 
 clean:
-	$(RM) $(MAIN) $(OBJ) $(TOBJ)
-	find -name '*.gc*' -delete
-	$(MAKELIB) clean
+	@for i in $(LIBS); do $(MAKE) -C lib/$$i $@; done
+	$(RM) $(OBJ) $(TOBJ) $(TOBJ:.o=.gc*)
 
 fclean:		clean
+	@for i in $(LIBS); do $(MAKE) -C lib/$$i $@; done
 	$(RM) $(NAME) $(TNAME)
-	$(MAKELIB) fclean
 
 re:			fclean all
 
-tests_run:	fclean $(LIB) $(SRC) $(TESTS)
-	CFLAGS="$(TFLAGS)" $(MAKE) $(OBJ) $(TOBJ)
-	$(CC) -o $(TNAME) $(OBJ) $(TOBJ) $(LDFLAGS) $(TLIBS) $(TFLAGS)
+tests_run:	fclean lib $(SRC) $(TESTS)
+	@CFLAGS="$(TFLAGS)" $(MAKE) $(TOBJ)
+	$(CC) -o $(TNAME) $(TOBJ) $(LDFLAGS) $(TLIBS) $(TFLAGS)
 	./$(TNAME)
