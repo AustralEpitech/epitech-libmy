@@ -8,6 +8,8 @@
 #ifndef MY_STRING_H
     #define MY_STRING_H 1
 
+    #define ARR_LEN(arr)    (sizeof(arr) / sizeof(*(arr)))
+
     #include <string.h>
 
 void   *my_memcpy(void *dest, const void *src, size_t n);
