@@ -6,7 +6,7 @@
 */
 
 #ifndef MY_ERROR_H
-    #define MY_ERROR_H 1
+    #define MY_ERROR_H
 
     #ifndef _GNU_SOURCE
         #define _GNU_SOURCE 1

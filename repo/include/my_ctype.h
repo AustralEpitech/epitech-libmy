@@ -6,7 +6,7 @@
 */
 
 #ifndef MY_CTYPE_H
-    #define MY_CTYPE_H 1
+    #define MY_CTYPE_H
 
     #define ISUPPER(c)  ('A' <= (c) && (c) <= 'Z')
     #define ISLOWER(c)  ('a' <= (c) && (c) <= 'z')

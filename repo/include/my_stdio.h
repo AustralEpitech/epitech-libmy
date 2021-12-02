@@ -6,7 +6,7 @@
 */
 
 #ifndef MY_STDIO_H
-    #define MY_STDIO_H 1
+    #define MY_STDIO_H
 
     #include <stdarg.h>
     #include <stdio.h>

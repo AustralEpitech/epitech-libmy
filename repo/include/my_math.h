@@ -6,7 +6,7 @@
 */
 
 #ifndef MY_MATH_H
-    #define MY_MATH_H 1
+    #define MY_MATH_H
 
     #include <math.h>
 

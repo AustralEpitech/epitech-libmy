@@ -6,7 +6,7 @@
 */
 
 #ifndef MY_STDLIB_H
-    #define MY_STDLIB_H 1
+    #define MY_STDLIB_H
 
     #define ABS(n)      ((n) < 0 ? -(n) : (n))
     #define FLOOR(n)    ((int)(n))

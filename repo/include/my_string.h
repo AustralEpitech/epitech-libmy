@@ -6,7 +6,7 @@
 */
 
 #ifndef MY_STRING_H
-    #define MY_STRING_H 1
+    #define MY_STRING_H
 
     #define ARR_LEN(arr)    (sizeof(arr) / sizeof(*(arr)))
 

@@ -6,7 +6,7 @@
 */
 
 #ifndef MY_STRINGS_H
-    #define MY_STRINGS_H 1
+    #define MY_STRINGS_H
 
     #include <strings.h>
 
