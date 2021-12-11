@@ -7,16 +7,12 @@
 
 CFLAGS	+=	-Wpedantic -Wall -Wextra -I../../include
 
-SRC		=	my_fprintf.c		\
-			my_fputc.c			\
-			my_fputnbr_base.c	\
-			my_fputnbr.c     	\
-			my_fputs.c       	\
-			my_printf.c      	\
-			my_putchar.c     	\
-			my_putnbr_base.c 	\
-			my_putnbr.c      	\
-			my_puts.c        	\
+SRC		=	my_fprintf.c	\
+			my_fputc.c		\
+			my_fputs.c		\
+			my_printf.c		\
+			my_putchar.c	\
+			my_puts.c		\
 			my_vfprintf.c
 
 OBJ		=	$(SRC:.c=.o)
