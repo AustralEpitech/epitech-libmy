@@ -15,5 +15,6 @@
     #include <stdlib.h>
 
 int my_atoi(const char *nptr);
+long my_strtol(const char *nptr, char **endptr, int base);
 
 #endif /* my_stdlib.h */

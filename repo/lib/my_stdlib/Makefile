@@ -7,7 +7,8 @@
 
 CFLAGS	+=	-Wpedantic -Wall -Wextra -I../../include
 
-SRC		=	my_atoi.c
+SRC		=	my_atoi.c	\
+			my_strtol.c
 
 OBJ		=	$(SRC:.c=.o)
 
