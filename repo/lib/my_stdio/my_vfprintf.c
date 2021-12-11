@@ -51,6 +51,10 @@ static char *getnbr(char *str, long nb, const char *base)
     int base_size = my_strlen(base);
 
     str[size] = '\0';
+    if (!nb) {
+        str[size - ++len] = '0';
+        return str + size - len;
+    }
     for (; nb; nb /= base_size) {
         digit = nb % base_size;
         str[size - ++len] = base[ABS(digit)];

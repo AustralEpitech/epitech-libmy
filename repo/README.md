@@ -1,4 +1,6 @@
 # %%PROJ%%
 
 ## USAGE
-`./%%PROJ%%`
+```console
+./%%PROJ%%
+```

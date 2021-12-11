@@ -15,6 +15,7 @@
     #include <errno.h>
     #include <error.h>
 
-void my_error(int status, int errnum, const char *format, ...);
+//void my_error(int status, int errnum, const char *format, ...);
+int my_error(int status, int errnum, const char *format, ...);
 
 #endif /* my_error.h */

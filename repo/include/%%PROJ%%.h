@@ -5,9 +5,7 @@
 ** %%PROJ%%
 */
 
-#include "%%PROJ%%.h"
+#ifndef %%PROJ_UP%%_H
+    #define %%PROJ_UP%%_H
 
-int %%PROJ%%(void)
-{
-    return 0;
-}
+#endif /* %%PROJ%%.h */
