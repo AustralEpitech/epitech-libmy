@@ -19,8 +19,9 @@ static int flush(int fildes, buf_t *buf)
     return size;
 }
 
-static size_t buf_append(int fildes, buf_t *buf, const char *str, size_t len)
+static size_t buf_append(int fildes, buf_t *buf, const char *str)
 {
+    size_t len = my_strlen(str);
     int diff = buf->size + len;
     size_t size = len;
 
@@ -64,9 +65,9 @@ static char *getnbr(char *str, long nb, const char *base)
     return str + size - len;
 }
 
-static char *get_var(char *tmp, char flag, va_list ap)
+static char *get_var(char *tmp, const char *format, va_list ap)
 {
-    switch (flag) {
+    switch (*format) {
         case 'd':
         case 'i':
             return getnbr(tmp, va_arg(ap, int), "0123456789");
@@ -80,32 +81,24 @@ static char *get_var(char *tmp, char flag, va_list ap)
             return getnbr(tmp, va_arg(ap, unsigned), "0123456789abcdef");
         case 'c':
             return my_strcpy(tmp, (char []){va_arg(ap, int), '\0'});
+        case 's':
+            return va_arg(ap, char *);
         case '%':
             return "%";
     }
-    return my_strcpy(tmp, (char []){flag, '\0'});
+    return my_strcpy(tmp, (char []){'%', *format, '\0'});
 }
 
 int my_vfprintf(int fildes, const char *format, va_list ap)
 {
     buf_t buf = {0};
-    size_t size;
     char nb[8 * sizeof(int) + 1] = {0};
-    char *tmp;
 
-    while (*format) {
-        size = my_strcspn(format, "%");
-        buf_append(fildes, &buf, format, size);
-        format += size;
-        if (*format != '%')
-            break;
-        if (format[1] == 's')
-            tmp = va_arg(ap, char *);
+    for (; *format; format++)
+        if (*format == '%')
+            buf_append(fildes, &buf, get_var(nb, ++format, ap));
         else
-            tmp = get_var(nb, format[1], ap);
-        buf_append(fildes, &buf, tmp, my_strlen(tmp));
-        format += 2;
-    }
+            buf_append(fildes, &buf, (char []){*format, '\0'});
     flush(fildes, &buf);
     return buf.written;
 }

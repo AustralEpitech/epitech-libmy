@@ -11,11 +11,6 @@ COPY="${BOLD}COPY${NORM}"
 REPLACING="${BOLD}REPLACING PROJECT NAME${NORM}"
 DONE="${BOLD}DONE${NORM}"
 
-CP="cp -fr"
-ECHO="echo -e"
-MKDIR="mkdir -p"
-RM="rm -fr"
-
 SRC="$(dirname "$0")/repo"
 NAME="$1"
 
@@ -23,15 +18,16 @@ while [ -z "$NAME" ]; do
     read -rp "Name: " NAME
 done
 
-set +e
-FILES="$(echo "$NAME"/* | grep -wv .git)"
-set -e
+if [ -n "$(ls -A "$NAME" 2> /dev/null)" ]; then
+    FILES="$(echo "$NAME"/* | grep -wv .git)"
+fi
+
 if [ -n "$FILES" ]; then
     read -rp "$NAME exists. Purge content? [Y/n] " ANS
     case "${ANS,,}" in
         "" | y | yes)
-            $ECHO "$REMOVE"
-            $ECHO "$FILES" | xargs $RM
+            echo -e "$REMOVE"
+            echo "$FILES" | xargs rm -fr
             ;;
         *)
             exit 1
@@ -40,11 +36,11 @@ if [ -n "$FILES" ]; then
 fi
 
 echo -e "$COPY"
-$MKDIR "$NAME"
-$CP "$SRC"/* "$NAME"
+mkdir -p "$NAME"
+cp -fr "$SRC"/* "$NAME"
 rename "%%PROJ%%" "$NAME" "$NAME"/**/*
 
-$ECHO "$REPLACING"
+echo -e "$REPLACING"
 find "$NAME" -type "f" ! -path "$NAME/.git/*" -exec sed -i "s/%%PROJ%%/$NAME/g; s/%%PROJ_UP%%/${NAME^^}/g" {} +
 
-$ECHO "$DONE"
+echo -e "$DONE"

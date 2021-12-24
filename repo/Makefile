@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-SHELL	=	/bin/bash
+SHELL	=	/bin/sh
 
 LIBS	=	my_{error,math,stdio,stdlib,string,strings}
 LDFLAGS	=	-Llib -l$(LIBS)
