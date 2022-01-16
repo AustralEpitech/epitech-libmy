@@ -15,19 +15,19 @@ CFLAGS	+=	-Wpedantic -Wall -Wextra -Iinclude
 TFLAGS	=	--coverage
 TLIBS	=	-lcriterion
 
-MAIN	=	src/main.c
-SRC		=	src/%%PROJ%%.c
+SRC		=	src/main.c		\
+			src/%%PROJ%%.c
 
 TESTS	=	tests/test_%%PROJ%%.c
 
-OBJ		=	$(MAIN:.c=.o) $(SRC:.c=.o)
-TOBJ	=	$(SRC:.c=.o) $(TESTS:.c=.o)
+OBJ		=	$(SRC:.c=.o)
+TOBJ	=	$(filter-out src/main.o,$(OBJ)) $(TESTS:.c=.o)
 
 NAME	=	%%PROJ%%
 
 TNAME	=	unit_test
 
-.PHONY:		all lib clean fclean re tests_run
+.PHONY:		all lib clean fclean re tests_run debug
 
 all:		lib $(NAME)
 
@@ -47,7 +47,10 @@ fclean:		clean
 
 re:			fclean all
 
-tests_run:	fclean lib $(SRC) $(TESTS)
-	@CFLAGS="$(TFLAGS)" $(MAKE) $(TOBJ)
+tests_run:	CFLAGS += $(TFLAGS)
+tests_run:	fclean lib $(TOBJ)
 	$(CC) -o $(TNAME) $(TOBJ) $(LDFLAGS) $(TLIBS) $(TFLAGS)
 	./$(TNAME)
+
+debug: CFLAGS += -g3
+debug: re
