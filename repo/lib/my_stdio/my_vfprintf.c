@@ -94,6 +94,8 @@ int my_vfprintf(int fildes, const char *format, va_list ap)
     buf_t buf = {0};
     char nb[8 * sizeof(int) + 1] = {0};
 
+    if (!format)
+        return -1;
     for (; *format; format++)
         if (*format == '%')
             buf_append(fildes, &buf, get_var(nb, ++format, ap));

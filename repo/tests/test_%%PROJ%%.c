@@ -7,7 +7,7 @@
 
 #include "tests.h"
 
-Test(test_%%PROJ%%, %%PROJ%%_1, .init=cr_redirect_stdout)
+Test(test_%%PROJ%%, %%PROJ%%_1, .init = cr_redirect_stdout)
 {
     %%PROJ%%();
 }

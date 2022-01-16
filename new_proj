@@ -18,9 +18,11 @@ while [ -z "$NAME" ]; do
     read -rp "Name: " NAME
 done
 
+set +e
 if [ -n "$(ls -A "$NAME" 2> /dev/null)" ]; then
     FILES="$(echo "$NAME"/* | grep -wv .git)"
 fi
+set -e
 
 if [ -n "$FILES" ]; then
     read -rp "$NAME exists. Purge content? [Y/n] " ANS
