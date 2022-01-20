@@ -10,15 +10,15 @@
 
 char **my_str_to_word_array(const char *str, const char *delim)
 {
-    char *s = my_strdup(str);
-    char **arr = malloc(my_strlen(str) * sizeof *arr);
+    char *s = my_strdup(str + my_strspn(str, delim));
+    char **arr = malloc((my_strlen(s) + 1) * sizeof *arr);
 
-    if (!s || !arr) {
+    if (!s || !(*s) || !arr) {
         free(s);
         free(arr);
         return NULL;
     }
-    arr[0] = my_strtok(s, delim);
+    *arr = my_strtok(s, delim);
     for (int i = 0; arr[i]; i++)
         arr[i + 1] = my_strtok(NULL, delim);
     return arr;

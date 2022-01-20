@@ -25,7 +25,7 @@ fi
 set -e
 
 if [ -n "$FILES" ]; then
-    read -rp "$NAME exists. Purge content? [Y/n] " ANS
+    read -rp "$NAME exists. Replace? [Y/n] " ANS
     case "${ANS,,}" in
         "" | y | yes)
             echo -e "$REMOVE"
