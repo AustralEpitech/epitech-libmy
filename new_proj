@@ -1,5 +1,4 @@
 #!/usr/bin/bash
-
 set -e
 shopt -s dotglob failglob
 
@@ -43,6 +42,6 @@ cp -fr "$SRC"/* "$NAME"
 rename "%%PROJ%%" "$NAME" "$NAME"/**/*
 
 echo -e "$REPLACING"
-find "$NAME" -type "f" ! -path "$NAME/.git/*" -exec sed -i "s/%%PROJ%%/$NAME/g; s/%%PROJ_UP%%/${NAME^^}/g" {} +
+find "$NAME" -type "f" ! -path "$NAME/.git/*" | xargs sed -i "s/%%PROJ%%/$NAME/g; s/%%PROJ_UP%%/${NAME^^}/g"
 
 echo -e "$DONE"
