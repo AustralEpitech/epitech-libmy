@@ -16,11 +16,14 @@ long my_strtol(const char *nptr, char **endptr, int base)
 
     if (base < 2 || base > 36)
         return 0;
-    sign = *nptr == '-' ? -1 : 1;
-    nptr += *nptr == '-' || *nptr == '+';
+    if (*nptr == '-') {
+        sign = -1;
+        nptr++;
+    } else if (*nptr == '+')
+        nptr++;
     for (; *nptr; nptr++) {
         c = ISDIGIT(*nptr) ? TODIGIT(*nptr) : TOLOWER(*nptr) - 'a' + 10;
-        if (c >= base)
+        if (c >= base || !ISALNUM(*nptr))
             break;
         n = n * base + sign * c;
     }

@@ -5,8 +5,6 @@
 ## Makefile
 ##
 
-SHELL	=	/bin/sh
-
 LIBS	=	my_{error,math,stdio,stdlib,string,strings}
 LDFLAGS	=	-Llib -l$(LIBS)
 
@@ -15,10 +13,14 @@ CFLAGS	+=	-Wpedantic -Wall -Wextra -Iinclude
 TFLAGS	=	--coverage
 TLIBS	=	-lcriterion
 
-SRC		=	src/main.c		\
-			src/%%PROJ%%.c
+SRC		=	main.c		\
+			%%PROJ%%.c
 
-TESTS	=	tests/test_%%PROJ%%.c
+SRC		:=	$(addprefix src/, $(SRC))
+
+TESTS	=	test_%%PROJ%%.c
+
+TESTS	:=	$(addprefix tests/, $(TESTS))
 
 OBJ		=	$(SRC:.c=.o)
 TOBJ	=	$(filter-out src/main.o,$(OBJ)) $(TESTS:.c=.o)

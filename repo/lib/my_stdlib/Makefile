@@ -19,7 +19,7 @@ NAME	=	../libmy_stdlib.a
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	$(AR) rc $(NAME) $(OBJ)
+	$(AR) rc $@ $(OBJ)
 
 clean:
 	$(RM) $(OBJ)

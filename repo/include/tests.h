@@ -10,7 +10,6 @@
 
     #include <criterion/criterion.h>
     #include <criterion/redirect.h>
-
-int %%PROJ%%(void);
+    #include "main.h"
 
 #endif /* tests.h */

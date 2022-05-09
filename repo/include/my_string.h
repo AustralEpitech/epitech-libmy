@@ -8,10 +8,12 @@
 #ifndef MY_STRING_H
     #define MY_STRING_H
 
-    #define ARR_LEN(arr)    (sizeof(arr) / sizeof(*(arr)))
+    #define ARRLEN(arr)    (sizeof(arr) / sizeof(*(arr)))
 
     #include <string.h>
 
+size_t  my_arrlen(const void *s);
+size_t  my_arrnlen(const void *s, size_t maxlen);
 void   *my_memcpy(void *dest, const void *src, size_t n);
 void   *my_memset(void *s, int c, size_t n);
 char   *my_revstr(char *str);
@@ -22,6 +24,7 @@ int     my_strcmp(const char *s1, const char *s2);
 char   *my_strcpy(char *dest, const char *src);
 size_t  my_strcspn(const char *s, const char *reject);
 char   *my_strdup(const char *s);
+char   *my_strerror(int errnum);
 size_t  my_strlen(const char *s);
 char   *my_strncat(char *dest, const char *src, size_t n);
 int     my_strncmp(const char *s1, const char *s2, size_t n);

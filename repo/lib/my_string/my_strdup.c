@@ -10,10 +10,10 @@
 
 char *my_strdup(const char *s)
 {
-    size_t len = my_strlen(s) + 1;
-    char *new = malloc(len);
+    size_t size = my_strlen(s) + 1;
+    char *new = malloc(size);
 
     if (!new)
         return NULL;
-    return my_memcpy(new, s, len);
+    return my_memcpy(new, s, size);
 }

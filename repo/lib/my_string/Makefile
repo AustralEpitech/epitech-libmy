@@ -7,7 +7,9 @@
 
 CFLAGS	+=	-Wpedantic -Wall -Wextra -I../../include
 
-SRC		=	my_memcpy.c				\
+SRC		=	my_arrlen.c				\
+			my_arrnlen.c			\
+			my_memcpy.c				\
 			my_memset.c				\
 			my_revstr.c				\
 			my_strcat.c				\
@@ -16,6 +18,7 @@ SRC		=	my_memcpy.c				\
 			my_strcpy.c				\
 			my_strcspn.c			\
 			my_strdup.c				\
+			my_strerror.c			\
 			my_strlen.c				\
 			my_strncat.c			\
 			my_strncmp.c			\
@@ -38,7 +41,7 @@ NAME	=	../libmy_string.a
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	$(AR) rc $(NAME) $(OBJ)
+	$(AR) rc $@ $(OBJ)
 
 clean:
 	$(RM) $(OBJ)

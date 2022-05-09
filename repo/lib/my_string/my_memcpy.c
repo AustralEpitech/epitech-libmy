@@ -9,7 +9,7 @@
 
 void *my_memcpy(void *dest, const void *src, size_t n)
 {
-    char *csrc = (char *)src;
+    const char *csrc = (const char *)src;
     char *cdest = (char *)dest;
 
     for (; n; n--)
