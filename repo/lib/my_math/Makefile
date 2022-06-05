@@ -7,8 +7,7 @@
 
 CFLAGS	+=	-Wpedantic -Wall -Wextra -I../../include
 
-SRC		=	my_pow.c	\
-			my_sqrt.c
+SRC		=	my_pow.c
 
 OBJ		=	$(SRC:.c=.o)
 

@@ -11,6 +11,5 @@
     #include <math.h>
 
 int my_pow(int n, int p);
-int my_sqrt(int n);
 
 #endif /* my_math.h */
