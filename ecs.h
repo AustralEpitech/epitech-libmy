@@ -1,3 +1,5 @@
+// this is only a draft, do not use it as is
+
 typedef struct entity_s {
     char name[256];
     union {
