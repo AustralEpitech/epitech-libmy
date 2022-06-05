@@ -12,7 +12,8 @@
 
     #include <stdlib.h>
 
-int  my_atoi(const char *nptr);
-long my_strtol(const char *nptr, char **endptr, int base);
+int   my_atoi(const char *nptr);
+void *my_calloc(size_t nmemb, size_t size);
+long  my_strtol(const char *nptr, char **endptr, int base);
 
 #endif /* my_stdlib.h */
