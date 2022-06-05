@@ -15,3 +15,7 @@ my_stdio:
     my_fputs:
     my_vfprintf:
         write
+
+my_stdlib:
+    my_calloc:
+        malloc
