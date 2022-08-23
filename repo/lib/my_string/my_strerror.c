@@ -8,7 +8,7 @@
 #include <errno.h>
 #include "my_string.h"
 
-static const struct {
+const struct {
     int id;
     char str[256];
 } ERRORS[] = {
@@ -150,8 +150,10 @@ static const struct {
 
 char *my_strerror(int errnum)
 {
-    for (int i = 0; i < (int)ARRLEN(ERRORS); i++)
-        if (ERRORS[i].id == errnum)
+    for (int i = 0; i < (int)ARRLEN(ERRORS); i++) {
+        if (ERRORS[i].id == errnum) {
             return (char *)ERRORS[i].str;
+        }
+    }
     return NULL;
 }

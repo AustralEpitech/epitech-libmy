@@ -11,7 +11,8 @@ size_t my_strcspn(const char *s, const char *reject)
 {
     size_t i = 0;
 
-    while (s[i] && !my_strchr(reject, s[i]))
+    while (s[i] && !my_strchr(reject, s[i])) {
         i++;
+    }
     return i;
 }

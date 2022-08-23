@@ -19,7 +19,8 @@ char **my_str_to_word_array(const char *str, const char *delim)
         return NULL;
     }
     *arr = my_strtok(s, delim);
-    for (size_t i = 0; arr[i]; i++)
+    for (size_t i = 0; arr[i]; i++) {
         arr[i + 1] = my_strtok(NULL, delim);
+    }
     return arr;
 }

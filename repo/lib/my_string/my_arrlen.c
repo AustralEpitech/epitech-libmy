@@ -12,7 +12,8 @@ size_t my_arrlen(const void *s)
     size_t i = 0;
     const char **cs = (const char **)s;
 
-    while (cs[i])
+    while (cs[i]) {
         i++;
+    }
     return i;
 }
