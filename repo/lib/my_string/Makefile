@@ -7,7 +7,9 @@
 
 CFLAGS	+=	-Wpedantic -Wall -Wextra -I../../include
 
-SRC		=	my_arrlen.c				\
+SRC		=	foreach.c				\
+			match.c					\
+			my_arrlen.c				\
 			my_arrnlen.c			\
 			my_memcpy.c				\
 			my_memset.c				\

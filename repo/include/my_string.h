@@ -8,10 +8,15 @@
 #ifndef MY_STRING_H
     #define MY_STRING_H
 
+    #define FOREACH(arr, iter)                                                \
+        for ((iter) = foreach((arr)); (iter) != NULL; (iter) = foreach(NULL))
+
     #define ARRLEN(arr)    (sizeof(arr) / sizeof(*(arr)))
 
     #include <string.h>
 
+void   *foreach(void *ptr);
+int     match(const char *s1, const char *s2);
 size_t  my_arrlen(const void *s);
 size_t  my_arrnlen(const void *s, size_t maxlen);
 void   *my_memcpy(void *dest, const void *src, size_t n);
