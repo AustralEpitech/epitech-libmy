@@ -7,7 +7,7 @@ and a script to auto
 create Epitech repositories from the template found in repo.
 
 ## Quick start
+
 ```console
 ./new_proj [name]
-# name can be provided as argument or can be read from standard output
 ```
