@@ -5,6 +5,8 @@
 ** foreach
 */
 
+#include <stddef.h>
+
 void *foreach(void *ptr)
 {
     static void **save_ptr = NULL;

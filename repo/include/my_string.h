@@ -19,6 +19,7 @@ void   *foreach(void *ptr);
 int     match(const char *s1, const char *s2);
 size_t  my_arrlen(const void *s);
 size_t  my_arrnlen(const void *s, size_t maxlen);
+int     my_memcmp(const void *s1, const void *s2, size_t n);
 void   *my_memcpy(void *dest, const void *src, size_t n);
 void   *my_memset(void *s, int c, size_t n);
 char   *my_revstr(char *str);

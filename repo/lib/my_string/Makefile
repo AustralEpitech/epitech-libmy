@@ -11,6 +11,7 @@ SRC		=	foreach.c				\
 			match.c					\
 			my_arrlen.c				\
 			my_arrnlen.c			\
+			my_memcmp.c				\
 			my_memcpy.c				\
 			my_memset.c				\
 			my_revstr.c				\

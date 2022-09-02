@@ -9,9 +9,10 @@
 
 int my_strncmp(const char *s1, const char *s2, size_t n)
 {
-    for (; *s1 == *s2 && *s1 && n; n--) {
+    while (*s1 == *s2 && *s1 && n) {
         s1++;
         s2++;
+        n--;
     }
     return n ? *s1 - *s2 : 0;
 }
