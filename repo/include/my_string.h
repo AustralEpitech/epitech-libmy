@@ -8,8 +8,12 @@
 #ifndef MY_STRING_H
     #define MY_STRING_H
 
-    #define FOREACH(arr, iter)                                                \
-        for ((iter) = foreach((arr)); (iter) != NULL; (iter) = foreach(NULL))
+    #define FOREACH(arr, iter)                       \
+        for (                                        \
+            typeof (*(arr)) (iter) = foreach((arr)); \
+            (iter) != NULL;                          \
+            (iter) = foreach(NULL)                   \
+        )
 
     #define ARRLEN(arr)    (sizeof(arr) / sizeof(*(arr)))
 
