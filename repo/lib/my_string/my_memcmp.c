@@ -9,5 +9,10 @@
 
 int my_memcmp(const void *s1, const void *s2, size_t n)
 {
-    return my_strncmp(s1, s2, n);
+    while (n) {
+        s1++;
+        s2++;
+        n--;
+    }
+    return *s1 - *s2;
 }
