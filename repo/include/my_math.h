@@ -1,15 +1,12 @@
 /*
-** EPITECH PROJECT, 2021
+** EPITECH PROJECT, 2023
 ** libmy
 ** File description:
 ** my_math
 */
 
-#ifndef MY_MATH_H
-    #define MY_MATH_H
+#pragma once
 
-    #include <math.h>
+#include <math.h>
 
 int my_pow(int n, int p);
-
-#endif /* my_math.h */

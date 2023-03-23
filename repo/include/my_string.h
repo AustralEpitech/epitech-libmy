@@ -1,23 +1,18 @@
 /*
-** EPITECH PROJECT, 2021
+** EPITECH PROJECT, 2023
 ** libmy
 ** File description:
 ** my_string
 */
 
-#ifndef MY_STRING_H
-    #define MY_STRING_H
+#pragma once
 
-    #define FOREACH(arr, iter)                       \
-        for (                                        \
-            typeof (*(arr)) (iter) = foreach((arr)); \
-            (iter) != NULL;                          \
-            (iter) = foreach(NULL)                   \
-        )
+#define FOREACH(arr, iter)  for (   \
+    typeof (*(arr)) (iter) = foreach((arr)); (iter) != 0; (iter) = foreach(0))
 
-    #define ARRLEN(arr)    (sizeof(arr) / sizeof(*(arr)))
+#define ARRLEN(arr) (sizeof(arr) / sizeof(*(arr)))
 
-    #include <string.h>
+#include <string.h>
 
 void   *foreach(void *ptr);
 int     match(const char *s1, const char *s2);
@@ -46,5 +41,3 @@ size_t  my_strspn(const char *s, const char *accept);
 char   *my_strstr(const char *haystack, const char *needle);
 char   *my_strtok(char *str, const char *delim);
 char   *my_strtok_r(char *s, const char *delim, char **save_ptr);
-
-#endif /* my_string.h */

@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2021
+** EPITECH PROJECT, 2023
 ** libmy
 ** File description:
 ** my_vfprintf
@@ -12,12 +12,12 @@
 
 static int my_bprintc(int fildes, buf_t *buf, char c)
 {
-    if (c)
-        buf->str[buf->size++] = c;
     if (!c || buf->size >= BUF_SIZE) {
         write(fildes, buf->str, buf->size);
         buf->written += buf->size;
         buf->size = 0;
+    } else {
+        buf->str[buf->size++] = c;
     }
     return 0;
 }
@@ -26,22 +26,26 @@ static int my_bprintl(int fildes, buf_t *buf, long nb, const char *base)
 {
     int base_size = my_strlen(base);
 
-    if (nb < 0)
+    if (nb < 0) {
         my_bprintc(fildes, buf, '-');
-    if (!nb)
+    } else if (!nb) {
         my_bprintc(fildes, buf, '0');
-    for (; nb; nb /= base_size)
+    }
+    for (; nb; nb /= base_size) {
         my_bprintc(fildes, buf, base[ABS(nb % base_size)]);
+    }
     return 0;
 }
 
 static int my_bprints(int fildes, buf_t *buf, const char *str)
 {
-    if (str)
-        for (; *str; str++)
+    if (str) {
+        for (; *str; str++) {
             my_bprintc(fildes, buf, *str);
-    else
+        }
+    } else {
         my_bprints(fildes, buf, "(null)");
+    }
     return 0;
 }
 
@@ -73,13 +77,16 @@ int my_vfprintf(int fildes, const char *format, va_list ap)
 {
     buf_t buf = {0};
 
-    if (!format)
+    if (!format) {
         return -1;
-    for (; *format; format++)
-        if (*format == '%')
+    }
+    for (; *format; format++) {
+        if (*format == '%') {
             my_bprintv(fildes, &buf, ++format, ap);
-        else
+        } else {
             my_bprintc(fildes, &buf, *format);
+        }
+    }
     my_bprintc(fildes, &buf, '\0');
     return buf.written;
 }

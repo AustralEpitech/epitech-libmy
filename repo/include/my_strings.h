@@ -1,16 +1,13 @@
 /*
-** EPITECH PROJECT, 2021
+** EPITECH PROJECT, 2023
 ** libmy
 ** File description:
 ** my_strings
 */
 
-#ifndef MY_STRINGS_H
-    #define MY_STRINGS_H
+#pragma once
 
-    #include <strings.h>
+#include <strings.h>
 
 int my_strcasecmp(const char *s1, const char *s2);
 int my_strncasecmp(const char *s1, const char *s2, size_t n);
-
-#endif /* my_strings.h */

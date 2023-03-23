@@ -1,13 +1,13 @@
 ##
-## EPITECH PROJECT, 2021
+## EPITECH PROJECT, 2023
 ## libmy
 ## File description:
 ## Makefile (my_stdio)
 ##
 
-CFLAGS	+=	-Wpedantic -Wall -Wextra -I../../include
+CFLAGS	+=	-I../../include -MMD
 
-SRC		=	my_fprintf.c	\
+SRC		:=	my_fprintf.c	\
 			my_fputc.c		\
 			my_fputs.c		\
 			my_printf.c		\
@@ -15,11 +15,10 @@ SRC		=	my_fprintf.c	\
 			my_puts.c		\
 			my_vfprintf.c
 
-OBJ		=	$(SRC:.c=.o)
+OBJ		:=	$(SRC:.c=.o)
+DEPENDS	:=	$(SRC:.c=.d)
 
-NAME	=	../libmy_stdio.a
-
-.PHONY:		all clean fclean re
+NAME	:=	../libmy_stdio.a
 
 all:		$(NAME)
 
@@ -27,9 +26,13 @@ $(NAME):	$(OBJ)
 	$(AR) rc $@ $(OBJ)
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) $(DEPENDS)
 
 fclean:		clean
 	$(RM) $(NAME)
 
-re:			fclean all
+re:			fclean
+	$(MAKE)
+
+.PHONY:		all clean fclean re
+-include $(DEPENDS)

@@ -1,13 +1,13 @@
 ##
-## EPITECH PROJECT, 2021
+## EPITECH PROJECT, 2023
 ## libmy
 ## File description:
 ## Makefile (my_string)
 ##
 
-CFLAGS	+=	-Wpedantic -Wall -Wextra -I../../include
+CFLAGS	+=	-I../../include -MMD
 
-SRC		=	foreach.c				\
+SRC		:=	foreach.c				\
 			match.c					\
 			my_arrlen.c				\
 			my_arrnlen.c			\
@@ -35,11 +35,10 @@ SRC		=	foreach.c				\
 			my_strtok_r.c			\
 			my_str_to_word_array.c
 
-OBJ		=	$(SRC:.c=.o)
+OBJ		:=	$(SRC:.c=.o)
+DEPENDS	:=	$(SRC:.c=.d)
 
-NAME	=	../libmy_string.a
-
-.PHONY:		all clean fclean re
+NAME	:=	../libmy_string.a
 
 all:		$(NAME)
 
@@ -47,9 +46,13 @@ $(NAME):	$(OBJ)
 	$(AR) rc $@ $(OBJ)
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) $(DEPENDS)
 
 fclean:		clean
 	$(RM) $(NAME)
 
-re:			fclean all
+re:			fclean
+	$(MAKE)
+
+.PHONY:		all clean fclean re
+-include $(DEPENDS)

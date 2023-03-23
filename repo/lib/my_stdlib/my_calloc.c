@@ -13,7 +13,8 @@ void *my_calloc(size_t nmemb, size_t size)
     size_t allocated = nmemb * size;
     void *mem = malloc(allocated);
 
-    if (mem)
+    if (mem) {
         my_memset(mem, 0, allocated);
+    }
     return mem;
 }

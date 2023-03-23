@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2021
+** EPITECH PROJECT, {{YEAR}}
 ** libmy
 ** File description:
 ** my_printf

@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2021
+** EPITECH PROJECT, 2023
 ** libmy
 ** File description:
 ** my_str_to_word_array

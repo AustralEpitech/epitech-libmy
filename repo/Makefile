@@ -1,35 +1,30 @@
 ##
-## EPITECH PROJECT, 2021
-## %%PROJ%%
+## EPITECH PROJECT, {{YEAR}}
+## {{PROJ}}
 ## File description:
 ## Makefile
 ##
 
-LIBS	=	my_{error,math,stdio,stdlib,string,strings}
-LDFLAGS	=	-Llib -l$(LIBS)
+LIBS		:=	my_{error,math,stdio,stdlib,string,strings}
+LDFLAGS		:=	-Llib -l$(LIBS)
 
-CFLAGS	+=	-Wpedantic -Wall -Wextra -Iinclude
+CFLAGS		+=	-Wpedantic -Wall -Wextra -Iinclude -MMD
 
-TFLAGS	=	--coverage
-TLIBS	=	-lcriterion
+TFLAGS		:=	--coverage
+TLIBS		:=	-lcriterion
 
-SRC		=	main.c		\
-			%%PROJ%%.c
+SRC			:=	src/main.c
 
-SRC		:=	$(addprefix src/, $(SRC))
+TESTS		:=	tests/test_function.c
 
-TESTS	=	test_%%PROJ%%.c
+OBJ			:=	$(SRC:.c=.o)
+DEPENDS		:=	$(OBJ:.o=.d)
+TOBJ		:=	$(filter-out src/main.o,$(OBJ)) $(TESTS:.c=.o)
+TDEPENDS	:=	$(TOBJ:.o=.d)
 
-TESTS	:=	$(addprefix tests/, $(TESTS))
+NAME		:=	{{PROJ}}
 
-OBJ		=	$(SRC:.c=.o)
-TOBJ	=	$(filter-out src/main.o,$(OBJ)) $(TESTS:.c=.o)
-
-NAME	=	%%PROJ%%
-
-TNAME	=	unit_test
-
-.PHONY:		all lib clean fclean re tests_run debug
+TNAME		:=	unit_test
 
 all:		lib $(NAME)
 
@@ -47,12 +42,16 @@ fclean:		clean
 	@for i in $(LIBS); do $(MAKE) -C lib/$$i $@; done
 	$(RM) $(NAME) $(TNAME)
 
-re:			fclean all
+re:			fclean
+	$(MAKE)
 
 tests_run:	CFLAGS += $(TFLAGS)
 tests_run:	fclean lib $(TOBJ)
 	$(CC) -o $(TNAME) $(TOBJ) $(LDFLAGS) $(TLIBS) $(TFLAGS)
 	./$(TNAME)
 
-debug: CFLAGS += -g3
-debug: re
+debug:		fclean
+	CFLAGS=-g3 $(MAKE)
+
+.PHONY:		all lib clean fclean re tests_run debug
+-include $(DEPENDS)

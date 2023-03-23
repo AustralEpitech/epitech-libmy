@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2021
+** EPITECH PROJECT, 2023
 ** libmy
 ** File description:
 ** my_puts
@@ -9,5 +9,5 @@
 
 int my_puts(const char *s)
 {
-    return my_fputs(STDOUT_FILENO, s);
+    return my_printf("%s\n", s);
 }

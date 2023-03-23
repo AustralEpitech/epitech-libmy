@@ -1,6 +1,6 @@
-# %%PROJ%%
+# {{PROJ}}
 
 ## USAGE
 ```console
-./%%PROJ%%
+./{{PROJ}}
 ```

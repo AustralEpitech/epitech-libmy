@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2021
+** EPITECH PROJECT, 2023
 ** libmy
 ** File description:
 ** my_error
@@ -21,8 +21,9 @@
 //    va_end(ap);
 //    if (errnum) {
 //        err = my_strerror(errnum);
-//        if (err)
+//        if (err) {
 //            my_fprintf(STDERR_FILENO, ": %s", err);
+//        }
 //    }
 //    my_fprintf(STDERR_FILENO, "\n");
 //    exit(status);
@@ -39,8 +40,9 @@ int my_error(int status, int errnum, const char *format, ...)
     va_end(ap);
     if (errnum) {
         err = my_strerror(errnum);
-        if (err)
+        if (err) {
             my_fprintf(STDERR_FILENO, ": %s", err);
+        }
     }
     my_fprintf(STDERR_FILENO, "\n");
     return status;

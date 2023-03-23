@@ -12,7 +12,8 @@ size_t my_arrnlen(const void *s, size_t maxlen)
     size_t i = 0;
     const char **cs = (const char **)s;
 
-    while (i < maxlen && cs[i])
+    while (i < maxlen && cs[i]) {
         i++;
+    }
     return i;
 }

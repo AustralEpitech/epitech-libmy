@@ -1,47 +1,55 @@
 #!/usr/bin/bash
 set -e
-shopt -s dotglob failglob
+shopt -s dotglob extglob nullglob
 
-BOLD="\033[1m"
-NORM="\033[0m"
+function ask_yn() {
+    local ans
 
-REMOVE="${BOLD}REMOVE${NORM}"
-COPY="${BOLD}COPY${NORM}"
-REPLACING="${BOLD}REPLACING PROJECT NAME${NORM}"
-DONE="${BOLD}DONE${NORM}"
+    echo -en "$1" >&2
+    read -r ans
+    case "${ans,,}" in
+        y|yes)
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+if [ -t 1 ]; then
+    BOLD='\e[1m'
+    NORMAL='\e[0m'
+fi
 
 SRC="$(dirname "$0")/repo"
 NAME="$1"
 
 while [ -z "$NAME" ]; do
-    read -rp "Name: " NAME
+    echo -n 'Name: ' >&2
+    read -r NAME
 done
 
-set +e
-if [ -n "$(ls -A "$NAME" 2> /dev/null)" ]; then
-    FILES="$(echo "$NAME"/* | grep -wv .git)"
-fi
-set -e
-
+FILES="$(echo "$NAME"/*!(.git))"
 if [ -n "$FILES" ]; then
-    read -rp "$NAME exists. Replace? [Y/n] " ANS
-    case "${ANS,,}" in
-        "" | y | yes)
-            echo -e "$REMOVE"
-            echo "$FILES" | xargs rm -fr
-            ;;
-        *)
-            exit 1
-            ;;
-    esac
+    if ask_yn "$NAME exists. Replace? [Y/n] "; then
+        echo -e "${BOLD}REMOVE${NORMAL}"
+        rm -rf "$FILES"
+    else
+        exit
+    fi
 fi
 
-echo -e "$COPY"
+echo -e "${BOLD}COPY${NORMAL}"
 mkdir -p "$NAME"
-cp -fr "$SRC"/* "$NAME"
-rename "%%PROJ%%" "$NAME" "$NAME"/**/*
+cp -rf "$SRC"/* "$NAME"
 
-echo -e "$REPLACING"
-find "$NAME" -type "f" ! -path "$NAME/.git/*" | xargs sed -i "s/%%PROJ%%/$NAME/g; s/%%PROJ_UP%%/${NAME^^}/g"
+YEAR="$(date '+%Y')"
+echo -e "${BOLD}REPLACING PROJECT NAME${NORMAL}"
+find "$NAME" -type f ! -path "$NAME/.git/*" -exec sed -i " \
+        s/{{PROJ}}/$NAME/g;                                \
+        s/{{PROJ_UP}}/${NAME^^}/g;                         \
+        s/{{YEAR}}/$YEAR/g                                 \
+    " '{}' +
 
-echo -e "$DONE"
+echo -e "${BOLD}DONE${NORMAL}"
