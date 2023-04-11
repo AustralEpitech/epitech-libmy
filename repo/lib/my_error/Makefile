@@ -10,7 +10,7 @@ CFLAGS	+=	-I../../include -MMD
 SRC		:=	my_error.c
 
 OBJ		:=	$(SRC:.c=.o)
-DEPENDS	:=	$(SRC:.c=.d)
+DEP	:=	$(SRC:.c=.d)
 
 NAME	:=	../libmy_error.a
 
@@ -20,7 +20,7 @@ $(NAME):	$(OBJ)
 	$(AR) rc $@ $(OBJ)
 
 clean:
-	$(RM) $(OBJ) $(DEPENDS)
+	$(RM) $(OBJ) $(DEP)
 
 fclean:		clean
 	$(RM) $(NAME)
@@ -29,4 +29,4 @@ re:			fclean
 	$(MAKE)
 
 .PHONY:		all clean fclean re
--include $(DEPENDS)
+-include $(DEP)

@@ -11,7 +11,7 @@ SRC		:=	my_strcasecmp.c		\
 			my_strncasecmp.c
 
 OBJ		:=	$(SRC:.c=.o)
-DEPENDS	:=	$(SRC:.c=.d)
+DEP	:=	$(SRC:.c=.d)
 
 NAME	:=	../libmy_strings.a
 
@@ -21,7 +21,7 @@ $(NAME):	$(OBJ)
 	$(AR) rc $@ $(OBJ)
 
 clean:
-	$(RM) $(OBJ) $(DEPENDS)
+	$(RM) $(OBJ) $(DEP)
 
 fclean:		clean
 	$(RM) $(NAME)
@@ -30,4 +30,4 @@ re:			fclean
 	$(MAKE)
 
 .PHONY:		all clean fclean re
--include $(DEPENDS)
+-include $(DEP)

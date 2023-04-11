@@ -1,3 +1,10 @@
+lists:
+    insert:
+    merge:
+    push_back:
+    push_front:
+        malloc
+
 my_error:
     my_error:
         strerror

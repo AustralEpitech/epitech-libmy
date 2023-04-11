@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-LIBS		:=	my_{error,math,stdio,stdlib,string,strings}
+LIBS		:=	lists my_{error,math,stdio,stdlib,string,strings}
 LDFLAGS		:=	-Llib -l$(LIBS)
 
 CFLAGS		+=	-Wpedantic -Wall -Wextra -Iinclude -MMD
@@ -18,9 +18,9 @@ SRC			:=	src/main.c
 TESTS		:=	tests/test_function.c
 
 OBJ			:=	$(SRC:.c=.o)
-DEPENDS		:=	$(OBJ:.o=.d)
+DEP		:=	$(OBJ:.o=.d)
 TOBJ		:=	$(filter-out src/main.o,$(OBJ)) $(TESTS:.c=.o)
-TDEPENDS	:=	$(TOBJ:.o=.d)
+TDEP	:=	$(TOBJ:.o=.d)
 
 NAME		:=	{{PROJ}}
 
@@ -54,4 +54,4 @@ debug:		fclean
 	CFLAGS=-g3 $(MAKE)
 
 .PHONY:		all lib clean fclean re tests_run debug
--include $(DEPENDS)
+-include $(DEP)

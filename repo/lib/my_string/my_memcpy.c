@@ -9,8 +9,8 @@
 
 void *my_memcpy(void *dest, const void *src, size_t n)
 {
-    const char *csrc = (const char *)src;
-    char *cdest = (char *)dest;
+    const char *csrc = src;
+    char *cdest = dest;
 
     while (n) {
         *cdest++ = *csrc++;
