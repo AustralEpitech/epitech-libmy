@@ -5,38 +5,38 @@
 ## Makefile
 ##
 
-LIBS		:=	lists my_{error,math,stdio,stdlib,string,strings}
-LDFLAGS		:=	-Llib -l$(LIBS)
+LIBS	:=	my_{error,math,stdio,stdlib,string,strings}
+LDFLAGS	:=	-Llib -l$(LIBS)
 
-CFLAGS		+=	-Wpedantic -Wall -Wextra -Iinclude -MMD
+CFLAGS	+=	-Wpedantic -Wall -Wextra -Iinclude -MMD
 
-TFLAGS		:=	--coverage
-TLIBS		:=	-lcriterion
+TFLAGS	:=	--coverage
+TLIBS	:=	-lcriterion
 
-SRC			:=	src/main.c
+SRC		:=	src/main.c
 
-TESTS		:=	tests/test_function.c
+TESTS	:=	tests/test_function.c
 
-OBJ			:=	$(SRC:.c=.o)
+OBJ		:=	$(SRC:.c=.o)
 DEP		:=	$(OBJ:.o=.d)
-TOBJ		:=	$(filter-out src/main.o,$(OBJ)) $(TESTS:.c=.o)
+TOBJ	:=	$(filter-out src/main.o,$(OBJ)) $(TESTS:.c=.o)
 TDEP	:=	$(TOBJ:.o=.d)
 
-NAME		:=	{{PROJ}}
+NAME	:=	{{PROJ}}
 
-TNAME		:=	unit_test
+TNAME	:=	unit_test
 
-all:		lib $(NAME)
+all:		$(NAME)
 
 lib:
 	@for i in $(LIBS); do $(MAKE) -C lib/$$i; done
 
-$(NAME):	$(OBJ)
+$(NAME):	lib $(OBJ)
 	$(CC) -o $@ $(OBJ) $(LDFLAGS)
 
 clean:
 	@for i in $(LIBS); do $(MAKE) -C lib/$$i $@; done
-	$(RM) $(OBJ) $(TOBJ) $(TOBJ:.o=.gc*)
+	$(RM) $(OBJ) $(TOBJ) $(TOBJ:.o=.gc*) $(DEP) $(TDEP)
 
 fclean:		clean
 	@for i in $(LIBS); do $(MAKE) -C lib/$$i $@; done
@@ -45,8 +45,9 @@ fclean:		clean
 re:			fclean
 	$(MAKE)
 
+tests_run:	fclean
 tests_run:	CFLAGS += $(TFLAGS)
-tests_run:	fclean lib $(TOBJ)
+tests_run:	lib $(TOBJ)
 	$(CC) -o $(TNAME) $(TOBJ) $(LDFLAGS) $(TLIBS) $(TFLAGS)
 	./$(TNAME)
 
