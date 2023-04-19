@@ -9,7 +9,6 @@
 #include <string.h>
 
 #include "lists.h"
-#include "slists.h"
 
 void *slist_push_back(void *head, const void *elem, size_t s)
 {

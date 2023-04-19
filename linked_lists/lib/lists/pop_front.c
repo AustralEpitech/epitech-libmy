@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 
-#include "slists.h"
+#include "lists.h"
 
 void *list_pop_front(void *head)
 {

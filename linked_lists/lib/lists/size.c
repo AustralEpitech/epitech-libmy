@@ -7,7 +7,7 @@
 
 #include <stddef.h>
 
-#include "slists.h"
+#include "lists.h"
 
 size_t list_size(const void *head)
 {

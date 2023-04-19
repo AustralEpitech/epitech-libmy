@@ -7,7 +7,7 @@
 
 #include <stddef.h>
 
-#include "slists.h"
+#include "lists.h"
 
 void *list_at(void *head, size_t pos)
 {

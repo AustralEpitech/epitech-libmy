@@ -5,7 +5,7 @@
 ** back
 */
 
-#include "slists.h"
+#include "lists.h"
 
 void *list_back(void *head)
 {

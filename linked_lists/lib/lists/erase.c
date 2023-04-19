@@ -8,7 +8,6 @@
 #include <stdlib.h>
 
 #include "lists.h"
-#include "slists.h"
 
 void *list_erase(void *head, size_t pos)
 {

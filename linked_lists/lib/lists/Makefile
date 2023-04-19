@@ -12,6 +12,8 @@ SRC		:=	at.c		\
 			clear.c		\
 			empty.c		\
 			erase.c		\
+			foreach.c	\
+			foreach_r.c	\
 			front.c		\
 			insert.c	\
 			merge.c		\

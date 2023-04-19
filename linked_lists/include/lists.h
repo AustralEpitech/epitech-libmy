@@ -9,6 +9,10 @@
 
 #include <stddef.h>
 
+typedef struct list_s {
+    void *next;
+} list_t;
+
 // Element access
 void *list_at(void *head, size_t elem);
 extern void *list_front(void *head);
@@ -44,3 +48,9 @@ void *list_pop_front(void *head);
 
 #define LIST_MERGE(h, h2) slist_merge((h), (h2), sizeof *(h2))
 void *slist_merge(void *head, const void *head2, size_t s);
+
+#define LIST_FOREACH(iter, arr)  for (            \
+    typeof (arr) (iter) = list_foreach((arr)); \
+    (iter); (iter) = list_foreach(0))
+void *list_foreach(const void *head);
+void *list_foreach_r(const void *head, const list_t **saveptr);

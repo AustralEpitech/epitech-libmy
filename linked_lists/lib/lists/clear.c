@@ -7,12 +7,11 @@
 
 #include <stdlib.h>
 
-#include "slists.h"
+#include "lists.h"
 
 void list_clear(void *head)
 {
-    for (list_t *lhead = head; lhead; lhead = head) {
-        head = lhead->next;
-        free(lhead);
+    LIST_FOREACH(l, head) {
+        free(l);
     }
 }

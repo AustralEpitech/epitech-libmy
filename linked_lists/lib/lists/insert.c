@@ -9,7 +9,6 @@
 #include <string.h>
 
 #include "lists.h"
-#include "slists.h"
 
 void *slist_insert(void *head, size_t pos, const void *elem, size_t s)
 {
