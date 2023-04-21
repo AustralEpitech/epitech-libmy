@@ -47,6 +47,7 @@ unit_test
 *.su
 *.idb
 *.pdb
+*.gc*
 
 # Kernel Module Compile Results
 *.mod*
