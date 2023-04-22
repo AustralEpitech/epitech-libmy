@@ -1,6 +1,5 @@
-#!/usr/bin/bash
-set -e
-shopt -s dotglob extglob nullglob
+#!/bin/bash -e
+shopt -s dotglob extglob failglob
 
 function ask_yn() {
     local ans
@@ -30,7 +29,7 @@ while [ -z "$NAME" ]; do
     read -r NAME
 done
 
-FILES="$(echo "$NAME"/*!(.git))"
+FILES="$(echo "$NAME"/!(.|..|git))"
 if [ -n "$FILES" ]; then
     if ask_yn "$NAME exists. Replace? [Y/n] "; then
         echo -e "${BOLD}REMOVE${NORMAL}"
