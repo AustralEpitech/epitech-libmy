@@ -1,4 +1,5 @@
 #!/bin/bash -e
+# shellcheck disable=SC2207
 shopt -s dotglob extglob failglob
 
 function ask_yn() {
@@ -29,11 +30,11 @@ while [ -z "$NAME" ]; do
     read -r NAME
 done
 
-FILES="$(echo "$NAME"/!(.|..|git))"
-if [ -n "$FILES" ]; then
-    if ask_yn "$NAME exists. Replace? [Y/n] "; then
+FILES=($(echo "$NAME"/!(.|..|.git)))
+if [ -n "${FILES[*]}" ]; then
+    if ask_yn "$NAME exists. Replace? [y/N] "; then
         echo -e "${BOLD}REMOVE${NORMAL}"
-        rm -rf "$FILES"
+        rm -rf "${FILES[@]}"
     else
         exit
     fi
