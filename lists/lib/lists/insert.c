@@ -12,7 +12,7 @@
 
 void *slist_insert(void *h, size_t pos, const void *el, size_t s)
 {
-    list_t *lh= list_at(h, pos - 1);
+    list_t *lh = list_at(h, pos - 1);
     list_t *tmp;
 
     if (!lh) {

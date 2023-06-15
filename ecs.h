@@ -1,5 +1,7 @@
 // this is only a draft, do not use it as is
 
+#pragma once
+
 typedef struct entity_s {
     char name[256];
     union {

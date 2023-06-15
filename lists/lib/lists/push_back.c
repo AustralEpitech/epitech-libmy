@@ -13,7 +13,7 @@
 void *slist_push_back(void *h, const void *el, size_t s)
 {
     list_t *lh = list_back(h);
-    list_t *new_el= malloc(s);
+    list_t *new_el = malloc(s);
 
     if (!new_el) {
         return NULL;

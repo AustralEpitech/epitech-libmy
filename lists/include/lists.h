@@ -77,7 +77,7 @@ void *slist_copy(const void *h, size_t s);
  * @return a new list
  */
 #define LIST_NEW(t, ...) \
-    slist_push_back(NULL, (type []){{NULL, __VA_ARGS__}}, sizeof (t))
+    slist_push_back(NULL, (t []){{NULL, __VA_ARGS__}}, sizeof (t))
 
 /**
  * Destructs the list.
@@ -205,7 +205,8 @@ void *list_foreach(const void *h);
 /**
  * Returns an iterator to the next element of the list.
  * @param  h    the name of the iterator
- * @param  sptr the pointer to which save the state of the list (not to be modified)
+ * @param  sptr the pointer to which save the state of the list (not to be
+ *         modified)
  * @see    LIST_FOREACH
  * @see    https://en.cppreference.com/w/cpp/container/list/begin
  * @see    strtok_r

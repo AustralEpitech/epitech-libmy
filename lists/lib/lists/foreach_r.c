@@ -10,7 +10,7 @@
 void *list_foreach_r(const void *h, const list_t **sptr)
 {
     if (!h) {
-        h= *sptr;
+        h = *sptr;
         if (!h) {
             return NULL;
         }
