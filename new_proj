@@ -1,6 +1,6 @@
 #!/bin/bash -e
 # shellcheck disable=SC2207
-shopt -s dotglob extglob failglob
+shopt -s dotglob extglob
 
 function ask_yn() {
     local ans
