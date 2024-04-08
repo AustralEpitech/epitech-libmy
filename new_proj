@@ -12,14 +12,12 @@ function ask_yn() {
     esac
 }
 
-function ask() {
-    local var="$1" prompt="$2"
-
-    while [ -z "${!var}" ]; do
-        printf '%s: ' "$prompt" >&2
-        read -r "${var?}"
-    done
-    declare "${var}=$ans"
+function usage() {
+    printf '%s\n' \
+        'USAGE: ./new_proj NAME [REPO]' \
+        'NAME is the name of the project and the folder' \
+        'REPO is the URL to the repo'
+    exit 1
 }
 
 if [ -t 1 ]; then
@@ -31,8 +29,10 @@ SRC="$(dirname "$0")/repo"
 NAME="$1"
 REPO="$2"
 
-ask NAME 'Name'
-ask REPO 'Repo URL (leave empty to not init)'
+case "$NAME" in
+    '-h'|'--help'|'') usage ;;
+    *) ;;
+esac
 
 read -ra FILES < <(echo "$NAME"/!(.|..|.git))
 if [ -n "${FILES[*]}" ]; then
