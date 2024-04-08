@@ -1,55 +1,72 @@
 #!/bin/bash -e
-# shellcheck disable=SC2207
 shopt -s dotglob extglob
 
 function ask_yn() {
     local ans
 
-    echo -en "$1" >&2
+    printf '%s (N/y) ' "$1" >&2
     read -r ans
     case "${ans,,}" in
-        y|yes)
-            return 0
-            ;;
-        *)
-            return 1
-            ;;
+        y*) return 0 ;;
+         *) return 1 ;;
     esac
 }
 
+function ask() {
+    local var="$1" prompt="$2"
+
+    while [ -z "${!var}" ]; do
+        printf '%s: ' "$prompt" >&2
+        read -r "${var?}"
+    done
+    declare "${var}=$ans"
+}
+
 if [ -t 1 ]; then
-    BOLD='\e[1m'
-    NORMAL='\e[0m'
+    BOLD=$'\e[1m'
+    NORMAL=$'\e[0m'
 fi
 
 SRC="$(dirname "$0")/repo"
 NAME="$1"
+REPO="$2"
 
-while [ -z "$NAME" ]; do
-    echo -n 'Name: ' >&2
-    read -r NAME
-done
+ask NAME 'Name'
+ask REPO 'Repo URL (leave empty to not init)'
 
-FILES=($(echo "$NAME"/!(.|..|.git)))
+read -ra FILES < <(echo "$NAME"/!(.|..|.git))
 if [ -n "${FILES[*]}" ]; then
-    if ask_yn "$NAME exists. Replace? [y/N] "; then
-        echo -e "${BOLD}REMOVE${NORMAL}"
-        rm -rf "${FILES[@]}"
+    if ask_yn "$NAME exists. Replace?"; then
+        echo "${BOLD}REMOVE${NORMAL}"
+        rm -rfv "${FILES[@]}"
     else
         exit
     fi
 fi
 
-echo -e "${BOLD}COPY${NORMAL}"
-mkdir -p "$NAME"
-cp -rf "$SRC"/* "$NAME"
+echo "${BOLD}COPY${NORMAL}"
+mkdir -pv "$NAME"
+cp -rfv "$SRC"/* "$NAME"
 
 YEAR="$(date '+%Y')"
-echo -e "${BOLD}REPLACING PROJECT NAME${NORMAL}"
-find "$NAME" -type f ! -path "$NAME/.git/*" -exec sed -i " \
-        s/{{PROJ}}/$NAME/g;                                \
-        s/{{PROJ_UP}}/${NAME^^}/g;                         \
-        s/{{YEAR}}/$YEAR/g                                 \
-    " '{}' +
+echo "${BOLD}REPLACING PROJECT NAME${NORMAL}"
+find "$NAME" -type f ! -path "$NAME/.git/*" -print -exec sed -i \
+        -e "s/{{PROJ}}/$NAME/g" \
+        -e "s/{{PROJ_UP}}/${NAME^^}/g" \
+        -e "s/{{YEAR}}/$YEAR/g" \
+    '{}' +
 
-echo -e "${BOLD}DONE${NORMAL}"
+if [ -n "$REPO" ]; then
+    echo "${BOLD}INIT GIT${NORMAL}"
+    (cd "$NAME"
+        git init
+        git remote remove origin 2> /dev/null || true
+        git remote add origin "$REPO"
+        git branch -m main
+        git add .
+        git commit -m 'Initial commit'
+        git branch --set-upstream-to=origin/main main
+    )
+fi
+
+echo "${BOLD}DONE${NORMAL}"
