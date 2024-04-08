@@ -5,7 +5,7 @@
 ** erase_if
 */
 
-#include <stdlib.h>
+#include <stddef.h>
 
 #include "lists.h"
 

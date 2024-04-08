@@ -5,8 +5,6 @@
 ** clear
 */
 
-#include <stdlib.h>
-
 #include "lists.h"
 
 void list_clear(void *h, void (*del)(void *h))

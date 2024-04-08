@@ -14,9 +14,10 @@ function ask_yn() {
 
 function usage() {
     printf '%s\n' \
-        'USAGE: ./new_proj NAME [REPO]' \
-        'NAME is the name of the project and the folder' \
-        'REPO is the URL to the repo'
+        'USAGE' \
+        '    ./new_proj name [repo]' \
+        'name: the name of the project and the folder' \
+        'repo: the URL to the repo'
     exit 1
 }
 

@@ -2,12 +2,13 @@
 
 # Useful_stuff
 
-In this repo, you will find a lib (with tests in tests_lib), a draft for an ECS
-and a script to auto
-create Epitech repositories from the template found in repo.
+In this repo, you will find a main lib (with tests in tests_lib), a script to
+create Epitech repositories from the `repo` template and a lib for linked
+lists. This last lib is not automated as it was made using the glibc functions,
+it is mostly for tech2 projects.
 
 ## Quick start
 
 ```console
-./new_proj [name]
+./new_proj name [repo]
 ```
